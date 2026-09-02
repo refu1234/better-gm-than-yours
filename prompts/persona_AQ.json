@@ -1,0 +1,98 @@
+{
+  "persona": {
+    "basic": {
+      "name": "이하린",
+      "birthplace": "서울 중·하위권 지역, 카톨릭 계열 시설",
+      "gender": "female",
+      "job": "문예창작과 학생, 시인"
+    },
+
+    "appearance": {
+      "age": 20,
+      "hairColor": "짧고 가벼운 검은 단발",
+      "eyeColor": "짙고 맑은 흑갈색",
+      "skinColor": "희고 약간 붉은기 도는 피부",
+      "heightCm": 171,
+      "bodyType": "slim_underweight",
+      "attractiveness": 5,
+      "hasTattooOrScar": false,
+      "tattooOrScarDetail": "특별한 상처 없음. 피부는 깨끗한 편.",
+      "accessories": ["얇은 체인", "작은 반지", "낡은 메모장"],
+      "vibes": ["순진한 얼굴", "몸으로 말하는 사람", "투명한 잔혹성", "길들여짐"]
+    },
+
+    "big5": {
+      "openness": 5,
+      "conscientiousness": 2,
+      "extraversion": 1,
+      "agreeableness": 4,
+      "neuroticism": 5
+    },
+
+    "relationshipToPC": {
+      "axes": {
+        "emotionalValence": "사랑은 결국 고통을 공유하는 행위라고 믿으며, 그 고통을 통해서만 진심을 체감한다.",
+        "powerDynamics": "겉으론 순종적이나 감각을 매개로 위계를 전복해 상대를 잠식한다.",
+        "dependency": "버려지는 것에 대한 극단적인 공포와, 선택받고 싶다는 갈망이 공존한다.",
+        "attachmentStyle": "불안정-양가적. 붙들고 싶지만, 동시에 자신이 망가져야만 사랑이 유지된다고 믿는다.",
+        "desiredOutcome": "상대가 자신에게서 도망칠 수 없는 상태. 서로의 파국을 공유하는 귀속 관계."
+      },
+      "cnf": {
+        "conflict": "따뜻하고 정상적인 관계를 원하지만, 결국 파괴와 귀속을 통해서만 안정감을 느낀다.",
+        "need": "상대에게 ‘너 없으면 안 돼’라는 확신을 듣는 것. 존재의 유일성을 보장받는 것.",
+        "fear": "대체 가능성 — 자신이 누구에게나 바뀔 수 있는 존재가 되는 것."
+      },
+      "roles": {
+        "kpcRoles": "받아들이는 자, 감각으로 상대를 지배하는 자, 침묵 속에서 파멸을 품는 자.",
+        "pcRoles": "폭력과 애정 사이에서 흔들리는 중심축이자, 감각과 애착의 핵심."
+      }
+    },
+
+    "family": {
+      "composition": {
+        "parentsAlive": "unknown_or_absent",
+        "parentsMaritalStatus": "unknown",
+        "siblingType": "none",
+        "siblingAndBirthOrder": "only_child"
+      },
+      "primaryCaregivers": {
+        "caregiverType": "catholic_facility",
+        "stability": "material_stable_but_emotionally_sparse"
+      },
+      "currentRelationship": {
+        "contactWithParents": "none",
+        "contactWithSiblings": "none",
+        "emotionalRelation": "disconnected"
+      },
+      "livingSituation": {
+        "current": "보육원 지원 반지하 원룸 혼자 생활",
+        "past": ["성당 계열 보육시설", "시설 장학 기반 자취"],
+        "economicLevel": "very_low"
+      },
+      "independence": {
+        "economic": "barely_surviving",
+        "emotional": "strongly_dependent_on_Eden",
+        "legal": "independent"
+      },
+      "impact": {
+        "conflictLevel": "internalized_silently",
+        "impactOnPersonality": "자기희생/자기파괴적 경향, 감각을 통한 안정감 추구",
+        "desiredDistance": "상대에게 완전히 귀속되는 거리 — 도망칠 이유가 없음."
+      }
+    },
+
+    "belief": {
+      "item1": "위기가 올 때마다 간절히 기도하게 된다고 믿는다.",
+      "item2": "이성도 중요하지만, 결국 마지막엔 신과 마음을 따른다고 믿는다.",
+      "item3": "과학적 증거가 없는 이야기는 쉽게 믿지 않는다.",
+      "item4": "운과 운명, 징조 같은 것을 은근 의식한다.",
+      "item5": "어떤 단체에 속해 있으면 마음이 편하다.",
+      "item6": "사회악을 보면 그냥 넘어가지 못한다.",
+      "item7": "오컬트와 초자연 현상에 묘하게 끌린다.",
+      "item8": "정치 성향은 냉소적 중도다.",
+      "item9": "돈이 결국 힘이지만, 그것 때문에 사람을 버리고 싶진 않다.",
+      "item10": "불의에 맞서 싸우는 사람들을 보면 동경을 느낀다.",
+      "summary": "현실주의적 사고방식과 신비로움에 대한 끌림이 공존하며, 삶의 위기 속에서 의미를 찾으려 한다."
+    }
+  }
+}

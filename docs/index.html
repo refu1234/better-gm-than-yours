@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>
+    Better GM Than Yours — 최종 결과 보고서
+  </title>
+  <link href="style_pdf_safe_redesign.css" rel="stylesheet" />
+</head>
+
+<body>
+  <button class="printnote" type="button" id="pdfExportButton" aria-label="Puppeteer PDF 저장">
+    PDF 저장
+  </button>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <small>
+          Final Report
+        </small>
+        Better GM Than Yours
+      </div>
+      <nav class="nav">
+        <a href="#trpg">
+          TRPG
+        </a>
+        <a href="#mvp">
+          세션 엔진
+        </a>
+        <a href="#tech">
+          기술
+        </a>
+        <a href="#prompt">
+          프롬프트
+        </a>
+        <a href="#image">
+          이미지
+        </a>
+        <a href="#artifact">
+          산출물
+        </a>
+        <a href="#startup">
+          창업
+        </a>
+        <a href="#mentor">
+          멘토링
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="slide hero" id="cover">
+      <div class="kicker">
+        캡스톤디자인 최종 결과 보고서
+      </div>
+      <h1>
+        Better GM
+        <br />
+        Than Yours
+      </h1>
+      <p class="kr">
+        너보다 세션 잘하는 GM 찾았어
+      </p>
+      <p class="sub">
+        AI가 GM과 KPC를 동시에 수행하는 TRPG 세션 자동화 플랫폼. 본 보고서는 발표자료 PPTX의
+        흐름을 기본으로, 과제계획서·창업플랜·지도보고서의 내용을 통합해 프로젝트 배경, 구현,
+        결과물, 창업 플랜, 멘토링 피드백과 분석/설계 산출물을 정리한다.
+      </p>
+      <div class="meta">
+        <div>
+          <b>
+            Team
+          </b>
+          4조 밥사조
+        </div>
+        <div>
+          <b>
+            Affiliation
+          </b>
+          가천대학교 P-실무프로젝트
+        </div>
+        <div>
+          <b>
+            Period
+          </b>
+          2026.03.03 - 2026.06.30
+        </div>
+        <div>
+          <b>
+            Repository
+          </b>
+          github.com/minju5054/GraduationPJ-TRPG
+        </div>
+      </div>
+    </section>
+    <section class="slide paper compact" id="summary">
+      <div class="no">
+        00 / Executive Summary
+      </div>
+      <h2 class="section-title">
+        보고서 요약
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 LLM을 단순 대화 상대가 아니라 TRPG 세션을 진행하는 게임 엔진으로 설계한 프로젝트다.
+        핵심 구현은 룰북 RAG, 시나리오 진행, 스탯 기반 판정, KPC 반응 생성을 결합해 한 세션이 처음부터 끝까지 이어지는 구조를 만드는 데 있다.
+        이후 텍스트 중심 세션의 몰입감을 강화하기 위해 장면 배경 이미지와 캐릭터 초상화를 결합해
+        텍스트와 이미지가 함께 진행되는 AI-GM 플랫폼으로 확장했다.
+      </p>
+      <div class="grid g4" style="margin-top: 28px">
+        <div class="card">
+          <h4>
+            핵심 문제
+          </h4>
+          <p>
+            GM 부족, 일정 조율 부담, 판정 계산과 서사 진행 피로.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            세션 엔진
+          </h4>
+          <p>
+            AI-GM이 룰, 판정, 서사, KPC 반응을 통합 수행.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            시각화 레이어
+          </h4>
+          <p>
+            시나리오 배경 이미지와 캐릭터 초상화로 텍스트 세션의 몰입감 강화.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            서비스 확장
+          </h4>
+          <p>
+            팬메이드 시나리오, 다중 룰북, 스토어 생태계로 확장 가능.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="trpg">
+      <div class="no">
+        01 / What is TRPG?
+      </div>
+      <div class="split">
+        <div>
+          <h2 class="big-title">
+            What is
+            <br />
+            TRPG?
+          </h2>
+          <p class="lead">
+            TRPG(Tabletop Role-Playing Game)는 GM이 세계와 사건을 진행하고, 플레이어가 캐릭터에
+            이입해 선택과 판정을 통해 이야기를 만들어가는 게임이다. 이 프로젝트는 이 구조에서 가장
+            부담이 큰 GM 역할을 LLM 기반 시스템으로 자동화하는 데 초점을 둔다.
+          </p>
+        </div>
+        <div class="imgbox">
+          <img alt="TRPG 플레이 장면 일러스트" src="BetterGMThanYours_readable_assets/image_01_47a43bcff2.webp" />
+          <div class="caption">
+            발표자료의 TRPG 소개 이미지
+          </div>
+        </div>
+      </div>
+      <div class="grid g3" style="margin-top:36px">
+        <div class="card">
+          <div class="no" style="margin-bottom:10px">
+            01 / GM
+          </div>
+          <h3>
+            GM · 수호자
+          </h3>
+          <p>
+            세계관과 장면을 묘사하고, NPC를 연기하며, 플레이어 행동에 맞춰 사건을 진행한다. 본 프로젝트에서 AI가 대체하려는 핵심 역할이다.
+          </p>
+        </div>
+        <div class="card">
+          <div class="no" style="margin-bottom:10px">
+            02 / Player
+          </div>
+          <h3>
+            Player
+          </h3>
+          <p>
+            자신의 캐릭터 관점에서 행동을 선언하고, GM의 서술과 판정 결과에 반응하며 세션의 방향을 만든다.
+          </p>
+        </div>
+        <div class="card">
+          <div class="no" style="margin-bottom:10px">
+            03 / Dice
+          </div>
+          <h3>
+            Dice
+          </h3>
+          <p>
+            행동의 성공·실패를 결정하는 무작위 판정 장치다. CoC에서는 스탯 기준으로 Regular, Hard, Extreme Success 등을 판정한다.
+          </p>
+        </div>
+        <div class="card">
+          <div class="no" style="margin-bottom:10px">
+            04 / Character
+          </div>
+          <h3>
+            Character
+          </h3>
+          <p>
+            플레이어와 KPC의 능력치, 성격, 관계, 외형 정보를 포함한다. 본 시스템에서는 persona.json과 stat 정보가 세션 생성에 사용된다.
+          </p>
+        </div>
+        <div class="card">
+          <div class="no" style="margin-bottom:10px">
+            05 / Rulebook
+          </div>
+          <h3>
+            Rulebook
+          </h3>
+          <p>
+            세계와 판정의 기준이 되는 규칙 집합이다. 본 프로젝트는 룰북 조항을 RAG로 검색해 판정 근거로 사용한다.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="problem">
+      <div class="no">
+        02 / Problem
+      </div>
+      <h2 class="section-title">
+        왜 AI-GM이 필요한가
+      </h2>
+      <p class="lead">
+        TRPG는 서사 몰입도가 높은 장르지만, 실제 플레이까지 도달하기 위해서는
+        GM 섭외, 일정 조율, 룰 이해, 진행 역량이라는 장벽을 넘어야 한다.
+      </p>
+
+      <div class="pain-board">
+        <div class="pain-main">
+          <div>
+            <span class="eyebrow">Core Pain</span>
+            <h3>
+              플레이보다
+              <br />
+              준비가 먼저 지친다
+            </h3>
+          </div>
+          <p>
+            본 프로젝트는 TRPG의 재미를 대체하는 것이 아니라,
+            세션을 시작하기 전후에 발생하는 운영 부담을 AI-GM 시스템으로 줄이는 데 초점을 둔다.
+          </p>
+        </div>
+
+        <div class="pain-grid">
+          <div class="pain-card">
+            <span class="num">01</span>
+            <h4>GM 섭외 난이도</h4>
+            <p>
+              세션을 이끌 GM은 룰 이해, 진행 경험, 즉흥 대응 능력, 준비 시간을 모두 요구받는다.
+            </p>
+          </div>
+
+          <div class="pain-card">
+            <span class="num">02</span>
+            <h4>일정 조율 비용</h4>
+            <p>
+              1회 세션에도 긴 플레이 시간이 필요하고, 참여자 전원의 시간을 맞추는 과정이 부담이 된다.
+            </p>
+          </div>
+
+          <div class="pain-card">
+            <span class="num">03</span>
+            <h4>진행자의 피로</h4>
+            <p>
+              GM은 서사 묘사, KPC 연기, 판정 계산, 장면 전환을 동시에 처리해야 한다.
+            </p>
+          </div>
+
+          <div class="pain-card">
+            <span class="num">04</span>
+            <h4>일반 AI의 한계</h4>
+            <p>
+              일반 챗봇은 대화는 가능하지만 룰 기반 판정, 장기 상태 관리, 세션 완결 구조가 약하다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="solve">
+      <div class="no">
+        03 / Solve
+      </div>
+      <h2 class="section-title">
+        AI를 대화 상대가 아니라
+        <br />
+        세션 엔진으로 재정의
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 GM 자동화, KPC 인격, 룰북 RAG, 판정 흐름, 출력 형식 제어를 하나의
+        세션 루프 안에 묶는다. 목표는 “그럴듯한 대화”가 아니라 “룰을 지키며 완결되는 플레이”다.
+      </p>
+      <div class="grid g4" style="margin-top: 34px">
+        <div class="card">
+          <h4>
+            AI-GM
+          </h4>
+          <p>
+            LLM이 GM과 KPC 역할을 동시에 수행해 사람 GM 없이 세션을 진행한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            룰 준수
+          </h4>
+          <p>
+            CoC 7판 룰북 기반 RAG와 판정 흐름으로 게임성을 유지한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            온디맨드
+          </h4>
+          <p>
+            일정 조율 없이 언제든 시작하고, 세션 종료 조건까지 관리한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            팬메이드 지원
+          </h4>
+          <p>
+            사용자 시나리오 업로드를 전제로 TRPG 커뮤니티 문화를 반영한다.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="services">
+      <div class="no">
+        04 / Existing Services
+      </div>
+      <h2 class="section-title">
+        기존 서비스와의 차이
+      </h2>
+      <p class="lead">
+        기존 서비스들은 대화 몰입감, 이미지 생성, 세션 보조 도구라는 장점이 있지만,
+        룰 기반 AI-GM이 팬메이드 시나리오를 완결형 세션으로 진행한다는 목표와는 차이가 있다.
+      </p>
+
+      <div class="service-compare">
+        <div class="service-row">
+          <div class="service-name">GPTRPG</div>
+          <div class="service-tags">
+            <span>AI 대화</span>
+            <span>이미지 생성</span>
+            <span>전용 UI</span>
+          </div>
+          <div class="service-note">
+            TRPG 분위기는 제공하지만 특정 룰북 기반 판정과 팬메이드 시나리오 완결성은 제한적이다.
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">ZETA / Character.AI</div>
+          <div class="service-tags">
+            <span>캐릭터 대화</span>
+            <span>페르소나</span>
+          </div>
+          <div class="service-note">
+            캐릭터 몰입감은 높지만 TRPG 룰, 판정, 세션 상태 관리를 지원하지 않는다.
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">Roll20 / CCFOLIA</div>
+          <div class="service-tags">
+            <span>세션 보조</span>
+            <span>맵/토큰</span>
+            <span>룰 지원</span>
+          </div>
+          <div class="service-note">
+            사람 GM을 전제로 한 도구이기 때문에 GM 진행과 KPC 반응을 자동화하지는 않는다.
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">ChatGPT 직접 사용</div>
+          <div class="service-tags">
+            <span>자유 대화</span>
+            <span>유연한 입력</span>
+          </div>
+          <div class="service-note">
+            시나리오 진행은 가능하지만 스탯 관리, 룰 참조, 장기 세션 흐름이 불안정하다.
+          </div>
+        </div>
+
+        <div class="service-row winner">
+          <div class="service-name">Better GM Than Yours</div>
+          <div class="service-tags">
+            <span>AI-GM</span>
+            <span>CoC 7판 RAG</span>
+            <span>팬메이드 시나리오</span>
+            <span>KPC 페르소나</span>
+            <span>이미지 UI</span>
+          </div>
+          <div class="service-note">
+            룰북 RAG, 시나리오 DB, 캐릭터 페르소나, 판정 흐름, 이미지 생성 모듈을 하나의 세션 루프로 통합한다.
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="aiadv">
+      <div class="no">
+        05 / Advantages of Using AI
+      </div>
+      <h2 class="big-title">
+        Why AI?
+      </h2>
+      <div class="grid g4" style="margin-top: 34px">
+        <div class="numcard">
+          <div class="n">
+            01
+          </div>
+          <p>
+            Reduced Session Duration
+          </p>
+        </div>
+        <div class="numcard">
+          <div class="n">
+            02
+          </div>
+          <p>
+            No Space-Time Constraints
+          </p>
+        </div>
+        <div class="numcard">
+          <div class="n">
+            03
+          </div>
+          <p>
+            Personalized Storytelling
+          </p>
+        </div>
+        <div class="numcard">
+          <div class="n">
+            04
+          </div>
+          <p>
+            No ups and downs for GM
+          </p>
+        </div>
+      </div>
+      <p class="lead" style="margin-top: 34px">
+        AI는 단순히 GM을 대체하는 도구가 아니라, 세션 길이와 참여자 조율을 줄이고, 사용자의 선택과
+        캐릭터 설정에 맞는 개인화된 서사를 안정적으로 제공하는 기반이 될 수 있다.
+      </p>
+    </section>
+    <section class="slide paper" id="mvp">
+      <div class="no">
+        06 / Core Session Engine
+      </div>
+      <h2 class="section-title">
+        AI-GM 세션 엔진 구현
+      </h2>
+      <p class="lead">
+        Better GM Than Yours의 핵심은 사용자의 입력에 단순히 답변하는 챗봇이 아니라,
+        룰북·시나리오·캐릭터 데이터·판정 결과를 함께 관리하며 장면 단위로 세션을 진행하는 AI-GM 엔진이다.
+      </p>
+
+      <div class="engine-board">
+        <div class="engine-core">
+          <span class="engine-kicker">Session Loop</span>
+          <h3>
+            대화가 아니라
+            <br />
+            실행 루프
+          </h3>
+          <p>
+            사용자 행동을 입력받고, 현재 장면과 캐릭터 상태를 재구성한 뒤,
+            룰북 검색과 판정을 거쳐 GM 서술과 KPC 반응을 생성한다.
+          </p>
+        </div>
+
+        <div class="engine-loop">
+          <div class="engine-step">
+            <b>01</b>
+            <div>
+              <h4>현재 장면 맥락 구성</h4>
+              <p>
+                scene_public, 사용자 입력, 이전 대화 로그, 캐릭터 상태를 현재 턴의 컨텍스트로 묶는다.
+              </p>
+            </div>
+          </div>
+
+          <div class="engine-step">
+            <b>02</b>
+            <div>
+              <h4>룰북·시나리오·캐릭터 검색</h4>
+              <p>
+                필요한 경우 RAG로 룰 조항과 시나리오 정보를 검색해 프롬프트에 주입한다.
+              </p>
+            </div>
+          </div>
+
+          <div class="engine-step">
+            <b>03</b>
+            <div>
+              <h4>판정과 서사 생성</h4>
+              <p>
+                스탯과 주사위 결과를 바탕으로 성공·실패를 계산하고, 결과를 내러티브로 변환한다.
+              </p>
+            </div>
+          </div>
+
+          <div class="engine-step">
+            <b>04</b>
+            <div>
+              <h4>상태 갱신과 다음 턴 연결</h4>
+              <p>
+                출력된 GM/KPC 응답과 진행도를 저장하고, 섹션 종료 여부에 따라 다음 장면으로 이동한다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        핵심 구현은 TRPG 세션을 대화 단위가 아니라 장면·판정·캐릭터 반응이 이어지는 실행 루프로 만드는 것이다.
+      </div>
+    </section>
+    <section class="slide" id="tech">
+      <div class="no">
+        07 / Technical Core
+      </div>
+      <h2 class="section-title">
+        TRPG 세션을 굴리는
+        <br />
+        세 가지 기술 코어
+      </h2>
+      <p class="lead">
+        프로젝트의 기술 설명은 세션 동작 관점에서 정리하는 것이 가장 명확하다. Better GM Than Yours의
+        핵심은 Gameplay, RAG, Prompt Engineering이 서로 맞물려 GM의 역할을 분해하고 자동화한다는
+        점이다.
+      </p>
+      <div class="diagram">
+        <svg aria-label="Technical core diagram" role="img" viewbox="0 0 1000 330">
+          <defs>
+            <marker id="arrow" markerheight="10" markerwidth="10" orient="auto" refx="8" refy="3">
+              <path d="M0,0 L0,6 L9,3 z" fill="#fff">
+              </path>
+            </marker>
+          </defs>
+          <circle cx="500" cy="165" fill="#fff" r="92">
+          </circle>
+          <text fill="#000" font-size="27" font-weight="800" text-anchor="middle" x="500" y="150">
+            Better GM
+          </text>
+          <text fill="#000" font-size="27" font-weight="800" text-anchor="middle" x="500" y="183">
+            Than Yours
+          </text>
+          <rect fill="none" height="85" rx="8" stroke="#777" width="230" x="70" y="45">
+          </rect>
+          <text fill="#fff" font-size="22" font-weight="800" text-anchor="middle" x="185" y="82">
+            Gameplay
+          </text>
+          <text fill="#aaa" font-size="15" text-anchor="middle" x="185" y="110">
+            Stat · Dice · Rule
+          </text>
+          <rect fill="none" height="85" rx="8" stroke="#777" width="230" x="70" y="200">
+          </rect>
+          <text fill="#fff" font-size="22" font-weight="800" text-anchor="middle" x="185" y="237">
+            RAG
+          </text>
+          <text fill="#aaa" font-size="15" text-anchor="middle" x="185" y="265">
+            Rulebook retrieval
+          </text>
+          <rect fill="none" height="85" rx="8" stroke="#777" width="230" x="700" y="45">
+          </rect>
+          <text fill="#fff" font-size="22" font-weight="800" text-anchor="middle" x="815" y="82">
+            Storytelling
+          </text>
+          <text fill="#aaa" font-size="15" text-anchor="middle" x="815" y="110">
+            Roleplay · Narrative
+          </text>
+          <rect fill="none" height="85" rx="8" stroke="#777" width="230" x="700" y="200">
+          </rect>
+          <text fill="#fff" font-size="22" font-weight="800" text-anchor="middle" x="815" y="237">
+            Prompt Engineering
+          </text>
+          <text fill="#aaa" font-size="15" text-anchor="middle" x="815" y="265">
+            Control · Self-check
+          </text>
+          <path d="M300 88 C380 90 395 116 425 132" fill="none" marker-end="url(#arrow)" stroke="#fff">
+          </path>
+          <path d="M300 242 C390 242 398 210 426 193" fill="none" marker-end="url(#arrow)" stroke="#fff">
+          </path>
+          <path d="M700 88 C620 90 605 116 575 132" fill="none" marker-end="url(#arrow)" stroke="#fff">
+          </path>
+          <path d="M700 242 C610 242 602 210 574 193" fill="none" marker-end="url(#arrow)" stroke="#fff">
+          </path>
+        </svg>
+      </div>
+    </section>
+    <section class="slide paper" id="architecture">
+      <div class="no">
+        08 / System Architecture
+      </div>
+      <h2 class="section-title">
+        아키텍처 구조
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 시나리오, 캐릭터, 룰북 데이터를 AI-GM 엔진에 연결하고,
+        세션 진행 결과를 텍스트·판정·이미지 UI로 출력하는 구조로 설계되었다.
+        핵심은 LLM을 단순 대화 모델이 아니라 TRPG 세션을 진행하는 오케스트레이터로 사용하는 것이다.
+      </p>
+      <div class="arch-diagram">
+        <div class="arch-row">
+          <div class="arch-group">
+            <h3>
+              Input Data
+            </h3>
+            <div class="arch-stack">
+              <div class="arch-item">
+                Scenario DB
+                <small>
+                  시나리오 배경, 사건 흐름, 장면 정보
+                </small>
+              </div>
+              <div class="arch-item">
+                Character Data
+                <small>
+                  PC/KPC persona, stat, 관계 정보
+                </small>
+              </div>
+              <div class="arch-item">
+                Rulebook DB
+                <small>
+                  CoC 7판 룰북 조항, 판정 기준
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="arch-arrow">
+            →
+          </div>
+          <div class="arch-group arch-core">
+            <h3>
+              AI-GM Orchestrator
+            </h3>
+            <div class="arch-stack">
+              <div class="arch-item">
+                Context Builder
+                <small>
+                  사용자 입력과 세션 상태를 현재 장면 맥락으로 구성
+                </small>
+              </div>
+              <div class="arch-item">
+                RAG Retrieval
+                <small>
+                  룰북·시나리오·캐릭터 정보를 검색해 프롬프트에 주입
+                </small>
+              </div>
+              <div class="arch-item">
+                LLM Generation
+                <small>
+                  GM 서술, KPC 반응, 다음 사건 진행 생성
+                </small>
+              </div>
+              <div class="arch-item">
+                Dice &amp; Rule Judge
+                <small>
+                  스탯 기반 판정 결과를 계산하고 서사에 반영
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="arch-arrow">
+            →
+          </div>
+          <div class="arch-group">
+            <h3>
+              Session UI
+            </h3>
+            <div class="arch-stack">
+              <div class="arch-item">
+                GM Narrative
+                <small>
+                  장면 묘사, 사건 진행, 선택 결과 출력
+                </small>
+              </div>
+              <div class="arch-item">
+                KPC Dialogue
+                <small>
+                  캐릭터 성격과 관계에 맞춘 대사 출력
+                </small>
+              </div>
+              <div class="arch-item">
+                Generated Image
+                <small>
+                  시나리오 배경에 맞춰 생성된 이미지를 화면에 표시
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-note">
+          사용자의 행동 입력은 다시 AI-GM Orchestrator로 전달되어 세션 상태를 갱신한다.
+          이 반복 루프를 통해 단발성 대화가 아니라, 장면 전환·판정·캐릭터 반응·이미지 표시가 이어지는 TRPG 세션 흐름을 구현한다.
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="gameplay">
+      <div class="no">
+        09 / Gameplay
+      </div>
+      <h2 class="section-title">
+        Stat-Based
+        <br />
+        Random Resolution
+      </h2>
+      <p class="lead">
+        TRPG의 게임성은 플레이어의 선택이 룰과 판정을 통해 결과로 변환되는 데 있다. 본 프로젝트는
+        캐릭터별 고유 스탯을 기반으로 판정을 수행하고, 결과를 서사로 다시 변환한다.
+      </p>
+      <div class="grid g4" style="margin-top: 30px">
+        <div class="card">
+          <h4>
+            Failure
+          </h4>
+          <p>
+            주사위 결과가 기준치를 초과하면 실패로 판단하고, 실패 서사를 생성한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Regular Success
+          </h4>
+          <p>
+            result 이하의 결과를 일반 성공으로 처리한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Hard Success
+          </h4>
+          <p>
+            result/2 이하일 때 더 강한 성공으로 처리한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Extreme Success
+          </h4>
+          <p>
+            result/5 이하일 때 극단적 성공으로 처리한다.
+          </p>
+        </div>
+      </div>
+      <div class="flow">
+        <span>
+          사용자 행동
+        </span>
+        <b>
+          →
+        </b>
+        <span>
+          판정 트리거
+        </span>
+        <b>
+          →
+        </b>
+        <span>
+          스탯 확인
+        </span>
+        <b>
+          →
+        </b>
+        <span>
+          주사위
+          입력
+        </span>
+        <b>
+          →
+        </b>
+        <span>
+          성공/실패 산출
+        </span>
+        <b>
+          →
+        </b>
+        <span>
+          내러티브 출력
+        </span>
+      </div>
+    </section>
+    <section class="slide paper" id="rag">
+      <div class="no">
+        10 / Custom RAG Architecture
+      </div>
+      <h2 class="section-title">
+        일반 QA RAG가 아니라
+        <br />
+        TRPG 판정용 RAG
+      </h2>
+      <p class="lead">
+        본 프로젝트의 RAG는 질문에 대한 설명을 생성하는 구조가 아니라,
+        플레이어 행동과 세션 상태를 기준으로 룰북 조항을 검색하고 판정 근거로 사용하는 구조다.
+      </p>
+
+      <img alt="RAG 구조 비교 다이어그램" src="BetterGMThanYours_readable_assets/그림1.png"
+        style="width:100%;height:auto;max-width:900px;" />
+
+      <div class="rag-redesign">
+        <div class="rag-card">
+          <span class="rag-kicker">Standard RAG</span>
+          <h3>질문에 답하는 RAG</h3>
+          <dl>
+            <div>
+              <dt>Query</dt>
+              <dd>사용자의 자연어 질문</dd>
+            </div>
+            <div>
+              <dt>Knowledge</dt>
+              <dd>문서, 위키, 일반 지식 베이스</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>검색 근거를 반영한 답변 텍스트</dd>
+            </div>
+            <div>
+              <dt>Flow</dt>
+              <dd>Retrieve → Generate</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="rag-card custom">
+          <span class="rag-kicker">Custom RAG</span>
+          <h3>판정을 수행하는 RAG</h3>
+          <dl>
+            <div>
+              <dt>Query</dt>
+              <dd>판정 의도가 포함된 플레이어 행동 서술</dd>
+            </div>
+            <div>
+              <dt>Knowledge</dt>
+              <dd>CoC 7판 룰북 조항, 판정 기준, 캐릭터 스탯</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>성공·실패 판단과 그에 따른 GM 내러티브</dd>
+            </div>
+            <div>
+              <dt>Flow</dt>
+              <dd>Retrieve → Apply Rules → Judge → Narrative</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="rag-flowline">
+        <span>Player Action</span>
+        <b>→</b>
+        <span>Rulebook Retrieval</span>
+        <b>→</b>
+        <span>Stat Check</span>
+        <b>→</b>
+        <span>Dice Judgment</span>
+        <b>→</b>
+        <span>GM Narrative</span>
+      </div>
+    </section>
+    <section class="slide" id="storytelling">
+      <div class="no">
+        11 / Storytelling
+      </div>
+      <h2 class="section-title">
+        system_prompt는
+        <br />
+        세션 운영 매뉴얼이다
+      </h2>
+      <p class="lead">
+        스토리텔링은 자유 생성이 아니라 조립형 시스템 프롬프트로 통제된다. 각 블록은 캐릭터 구현,
+        세션 규칙, GM 비밀 정보, 공개 시나리오, 출력 형식을 나누어 담당한다.
+      </p>
+      <div class="diagram">
+        <svg viewbox="0 0 980 360">
+          <defs>
+            <marker id="arr2" markerheight="10" markerwidth="10" orient="auto" refx="8" refy="3">
+              <path d="M0,0 L0,6 L9,3 z" fill="#fff">
+              </path>
+            </marker>
+          </defs>
+          <rect fill="#fff" height="110" rx="10" width="200" x="390" y="122">
+          </rect>
+          <text fill="#000" font-size="28" font-weight="900" text-anchor="middle" x="490" y="168">
+            system
+          </text>
+          <text fill="#000" font-size="28" font-weight="900" text-anchor="middle" x="490" y="202">
+            prompt
+          </text>
+          <g fill="none" stroke="#777">
+            <rect height="70" rx="8" width="250" x="35" y="45">
+            </rect>
+            <rect height="70" rx="8" width="250" x="35" y="145">
+            </rect>
+            <rect height="70" rx="8" width="250" x="35" y="245">
+            </rect>
+            <rect height="70" rx="8" width="250" x="695" y="80">
+            </rect>
+            <rect height="70" rx="8" width="250" x="695" y="210">
+            </rect>
+          </g>
+          <g fill="#fff" font-size="20" font-weight="800">
+            <text text-anchor="middle" x="160" y="88">
+              ① kpc_block
+            </text>
+            <text text-anchor="middle" x="160" y="188">
+              ② trpg_rules
+            </text>
+            <text text-anchor="middle" x="160" y="288">
+              ③ scenario_secret
+            </text>
+            <text text-anchor="middle" x="820" y="123">
+              ④ scene_public
+            </text>
+            <text text-anchor="middle" x="820" y="253">
+              ⑤ formatting_guide
+            </text>
+          </g>
+          <g fill="none" marker-end="url(#arr2)" stroke="#fff">
+            <path d="M285 80 L390 147">
+            </path>
+            <path d="M285 180 L390 180">
+            </path>
+            <path d="M285 280 L390 213">
+            </path>
+            <path d="M695 115 L590 153">
+            </path>
+            <path d="M695 245 L590 206">
+            </path>
+          </g>
+        </svg>
+      </div>
+    </section>
+    <section class="slide paper" id="personality">
+      <div class="no">
+        12 / KPC Personality Engine
+      </div>
+      <h2 class="section-title">
+        KPC는 고정된 대사가 아니라
+        <br />
+        성격 모델로 반응한다
+      </h2>
+      <p class="lead">
+        persona.json은 KPC의 기본 정보와 외형, Big Five 성격 수치, PC와의 관계축, 신념과 세계관을
+        구조화한다. 이를 kpc_block으로 변환해 세션 중 일관된 캐릭터 반응을 생성한다.
+      </p>
+      <div class="grid g4" style="margin-top: 28px">
+        <div class="card">
+          <h4>
+            basic / appearance
+          </h4>
+          <p>
+            이름, 나이, 외형, 말투, 기본 인상.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            big5
+          </h4>
+          <p>
+            Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            relationshipToPC
+          </h4>
+          <p>
+            갈등, 욕구, 두려움, 역할, 관계 축.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            belief
+          </h4>
+          <p>
+            인물의 신념, 세계관, 상황 해석 방식.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="prompt">
+      <div class="no">
+        13 / Prompt Engineering
+      </div>
+      <h2 class="section-title">
+        해결된 4가지 오작동
+      </h2>
+      <p class="lead">
+        LLM 기반 세션 진행에서 중요한 것은 모델이 “잘 말하는 것”보다
+        정해진 역할, 판정 흐름, 출력 형식을 이탈하지 않도록 제어하는 것이다.
+      </p>
+
+      <div class="fix-board">
+        <div class="fix-card">
+          <div class="fix-no">01 / Scene Leakage</div>
+          <h3>scene_public 전체 출력</h3>
+          <div class="before">
+            <strong>Before</strong>
+            <p>모델이 시나리오 텍스트를 즉시 출력할 대본처럼 해석했다.</p>
+          </div>
+          <div class="after">
+            <strong>After</strong>
+            <p>start_scene 섹션 입구와 한 턴 진행 규칙을 강화해 자동 전개를 제한했다.</p>
+          </div>
+        </div>
+
+        <div class="fix-card">
+          <div class="fix-no">02 / Format Drift</div>
+          <h3>출력 형식·라벨 흔들림</h3>
+          <div class="before">
+            <strong>Before</strong>
+            <p>GM/KPC 발화가 섞이고 라벨 누락으로 UI 처리가 불안정했다.</p>
+          </div>
+          <div class="after">
+            <strong>After</strong>
+            <p>PROGRESS / GM / KPC 3단 출력 구조를 고정하고 형식 위반을 오류로 처리했다.</p>
+          </div>
+        </div>
+
+        <div class="fix-card">
+          <div class="fix-no">03 / Judgment Missing</div>
+          <h3>판정 유도 누락</h3>
+          <div class="before">
+            <strong>Before</strong>
+            <p>대화 중심 장면에서 판정이 필요한 행동을 감지하지 못했다.</p>
+          </div>
+          <div class="after">
+            <strong>After</strong>
+            <p>판정 규칙을 프롬프트 상단으로 올리고 성공·실패 사전 서술을 금지했다.</p>
+          </div>
+        </div>
+
+        <div class="fix-card">
+          <div class="fix-no">04 / Endless Section</div>
+          <h3>섹션 종료 실패</h3>
+          <div class="before">
+            <strong>Before</strong>
+            <p>“충분히 진행되면 종료”라는 정성 기준 때문에 세션이 늘어졌다.</p>
+          </div>
+          <div class="after">
+            <strong>After</strong>
+            <p>scene_public 문장 수와 필수 사건 기준으로 진행도를 정량화했다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="system-prompt">
+      <div class="no">
+        13-1 / System Prompt Design
+      </div>
+      <h2 class="section-title">
+        시스템 프롬프트 구조
+      </h2>
+      <p class="lead">
+        AI-GM은 캐릭터 구현 정보, 세션 규칙, 시나리오 비밀 정보, 공개 장면 스크립트,
+        출력 포맷 규칙을 하나의 시스템 프롬프트로 조합해 현재 장면에 맞는 응답을 생성한다.
+      </p>
+      <div class="prompt-layout">
+        <div class="prompt-codebox">
+          <pre class="prompt-code"><code><span class="kw">def</span> <span class="fn">construct_prompt</span>(<span class="var">section_id</span>):
+        <span class="var">string</span> = <span class="str">f"scene_public{section_id}.txt"</span>
+        <span class="var">scene_public</span> = <span class="fn">load_file</span>(<span class="var">string</span>)
+        <span class="var">final_prompt</span> = <span class="str">f"""</span>
+        <span class="slot">{kpc_block}</span>
+        <span class="slot">{trpg_rules}</span>
+        <span class="comment">[시나리오 비밀 정보 - GM 전용]</span>
+        <span class="slot">{scenario_secret}</span>
+        <span class="comment">[시나리오 전체 장면 목록 - 참고만, 즉시 출력 금지]</span>
+        <span class="slot">{scene_public}</span>
+        <span class="slot">{formatting_guide}</span>
+        <span class="str">"""</span>.<span class="fn">strip</span>()
+    
+        <span class="kw">return</span> <span class="var">final_prompt</span></code></pre>
+        </div>
+        <div class="prompt-explain">
+          <div class="prompt-explain-item">
+            <div class="prompt-explain-num">
+              1
+            </div>
+            <div>
+              <b>
+                Character implementation data
+              </b>
+              <p>
+                KPC의 성격, 말투, 관계, 행동 기준을 주입해 캐릭터 연기의 일관성을 유지한다.
+              </p>
+            </div>
+          </div>
+          <div class="prompt-explain-item">
+            <div class="prompt-explain-num">
+              2
+            </div>
+            <div>
+              <b>
+                Session rules
+              </b>
+              <p>
+                TRPG 진행 규칙과 판정 기준을 제공해 AI-GM의 응답을 룰 기반으로 제어한다.
+              </p>
+            </div>
+          </div>
+          <div class="prompt-explain-item">
+            <div class="prompt-explain-num">
+              3
+            </div>
+            <div>
+              <b>
+                Scenario secret
+              </b>
+              <p>
+                GM만 알아야 하는 비밀 정보를 포함하되, 플레이어에게 즉시 노출되지 않도록 한다.
+              </p>
+            </div>
+          </div>
+          <div class="prompt-explain-item">
+            <div class="prompt-explain-num">
+              4
+            </div>
+            <div>
+              <b>
+                Scenario script
+              </b>
+              <p>
+                현재 장면에서 공개 가능한 배경과 사건 정보를 불러와 장면 묘사의 기준으로 사용한다.
+              </p>
+            </div>
+          </div>
+          <div class="prompt-explain-item">
+            <div class="prompt-explain-num">
+              5
+            </div>
+            <div>
+              <b>
+                Output formatting rules
+              </b>
+              <p>
+                응답 형식과 출력 순서를 고정해 세션 UI에 안정적으로 연결한다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quote">
+        시스템 프롬프트는 캐릭터성, 룰, 시나리오 정보를 하나의 실행 맥락으로 묶어 AI-GM의 응답을 제어하는 핵심 구조다.
+      </div>
+    </section>
+    <section class="slide paper" id="promptmethods">
+      <div class="no">
+        14 / Prompt Control Methods
+      </div>
+      <h2 class="section-title">
+        프롬프트 제어 전략
+      </h2>
+      <div class="grid g2">
+        <div class="card">
+          <h4>
+            Constraint Grounding
+          </h4>
+          <p>
+            TRPG 규칙을 프롬프트 상단에 배치하고 start_scene 마커와 한 턴 진행 규칙으로 과도한
+            자동 전개를 막는다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Context Packing
+          </h4>
+          <p>
+            중간 컨텍스트 손실을 줄이기 위해 앞부분에는 역할·흐름 규칙, 중간에는 scene_public,
+            뒤쪽에는 scenario_secret과 예외 규칙을 배치한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Self-Check / Instruction Clarity
+          </h4>
+          <p>
+            출력 전 역할 일관성, 비밀 누설, 장면 흐름, 형식 위반 여부를 점검하게 하여 예측 가능한
+            출력을 유도한다.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            Decomposition / Scaffolding
+          </h4>
+          <p>
+            GM → KPC → User → Check → User → GM의 순환 구조로 복합 과업을 단계별로 분해한다.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="flow">
+      <div class="no">15 / Session Flow</div>
+      <h2 class="section-title">AI-GM Session Activity Diagram</h2>
+      <p class="lead">
+        세션은 초기화, 프롬프트 조합, 메인 진행 루프, 판정 처리, 섹션 전환으로 구성된다.
+        핵심은 자유 대화가 아니라 상태 변화와 조건 분기를 가진 activity flow를 반복 실행하는 구조라는 점이다.
+      </p>
+
+      <div class="imgbox flow-uml">
+        <img src="BetterGMThanYours_readable_assets/session_activity_diagram.svg"
+          alt="AI-GM Session Activity Diagram" />
+        <div class="caption">PlantUML 기반 AI-GM Session Activity Diagram</div>
+      </div>
+
+      <div class="takeaway">
+        핵심은 “사용자 입력 → 생성 → 판정/검증 → 상태 갱신 → 다음 장면”이 반복되는 세션 루프를 구현했다는 점이다.
+      </div>
+    </section>
+    <section class="slide paper" id="demoresult">
+      <div class="no">
+        16 / Result Summary
+      </div>
+      <h2 class="section-title">
+        구현 결과 요약
+      </h2>
+      <p class="lead">
+        구현 결과는 크게 AI-GM 세션 엔진과 시각화 레이어로 구성된다.
+        세션 엔진은 시나리오 진행, 룰 기반 판정, KPC 반응, 프롬프트 안정화를 담당하고,
+        시각화 레이어는 장면 배경과 캐릭터 초상화를 통해 텍스트 중심 세션의 몰입감을 강화한다.
+      </p>
+      <div class="grid g3" style="margin-top: 28px">
+        <div class="card">
+          <h4>
+            세션 완결 구조
+          </h4>
+          <p>
+            시나리오 섹션 단위 진행, 진행도 계산, END OF SECTION 감지, 엔딩 내러티브 생성.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            룰 기반 판정
+          </h4>
+          <p>
+            /dice 흐름, dicejudgement(), CoC 룰북 RAG, 판정 결과 내러티브 생성.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            캐릭터 반응
+          </h4>
+          <p>
+            persona.json과 Big Five 기반 KPC 인격 블록으로 대화 일관성 강화.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            프롬프트 안정화
+          </h4>
+          <p>
+            자동 전개, 형식 붕괴, 판정 누락, 섹션 종료 실패를 문제-원인-해결 방식으로 개선.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            이미지 모듈
+          </h4>
+          <p>
+            Static 배경 이미지 생성, 인물 초상화 생성, [장소: X] 태그 기반 배경 동적 교체.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            서비스화 기반
+          </h4>
+          <p>
+            팬메이드 시나리오, 수익 모델, 룰 확장, UGC 스토어 방향까지 사업화 계획 수립.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="image">
+      <div class="no">
+        17 / Visual Session Layer
+      </div>
+      <h2 class="section-title">
+        텍스트 세션에서
+        <br />
+        시각화된 세션 경험으로
+      </h2>
+      <p class="lead">
+        AI-GM이 생성한 서사는 텍스트 출력에 그치지 않고, 시나리오 배경 이미지와 캐릭터 비주얼로 연결된다.
+        장면의 공간 정보와 KPC 외형 정보를 이미지 생성 파이프라인과 연결해
+        세션 진행 상황을 시각적으로 함께 전달한다.
+      </p>
+      <div class="grid g2" style="margin-top: 30px">
+        <div class="card">
+          <h4>
+            Static 배경
+          </h4>
+          <p>
+            시나리오 등록 시 공간별 PNG를 사전 생성하고, GM의 [장소: X] 태그에 맞춰 세션 중 동적으로 교체.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            인물 초상화
+          </h4>
+          <p>
+            persona.json 기반 appearance.json을 만들고 고정 seed로 캐릭터 초상화 생성 후 DB 저장.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="staticbg">
+      <div class="no">
+        18 / Static Background Generation
+      </div>
+      <h2 class="section-title">
+        장면별 배경 이미지 생성
+      </h2>
+      <p class="lead">
+        실시간 생성이 아니라 시나리오 등록 시 주요 공간을 미리 렌더링해 DB에 저장하고, 세션 중
+        필요한 시점에 불러오는 구조다. 비주얼 노벨처럼 인물 없는 배경에 투명 캐릭터 스탠드를
+        합성하는 방식으로 확장할 수 있다.
+      </p>
+      <div class="grid g3" style="margin-top: 24px">
+        <div class="imgbox">
+          <img alt="현관 배경" src="BetterGMThanYours_readable_assets/image_03_ad0351cbd5.webp" />
+          <div class="caption">
+            Entrance: shoe rack, sneakers, umbrella stand
+          </div>
+        </div>
+        <div class="imgbox">
+          <img alt="거실 배경" src="BetterGMThanYours_readable_assets/image_04_c94f0d1a08.webp" />
+          <div class="caption">
+            Living Room: sofa, TV, natural sunlight
+          </div>
+        </div>
+        <div class="imgbox">
+          <img alt="욕실 배경" src="BetterGMThanYours_readable_assets/image_05_58d9025690.webp" />
+          <div class="caption">
+            Bathroom: bathtub, tiles, toiletries
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <tbody>
+            <tr>
+              <td>
+                Model
+              </td>
+              <td>
+                NovelAI / NAI
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Sampling
+              </td>
+              <td>
+                Euler Ancestral
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Steps
+              </td>
+              <td>
+                23
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Guidance
+              </td>
+              <td>
+                5
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Seed
+              </td>
+              <td>
+                1000 고정
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Prompt Strategy
+              </td>
+              <td>
+                realistic style, highly detailed, not luxury로 일반 가정집 톤 통일
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <img src="BetterGMThanYours_readable_assets/3.svg" alt="Static 배경 이미지 생성 Phase"
+        style="width: 100%; margin-top: 20px;">
+    </section>
+    <section class="slide" id="bgserve">
+      <div class="no">
+        19 / Background Tag &amp; Serving
+      </div>
+      <h2 class="section-title">
+        배경 전환 태그 설계 &amp;
+        <br />
+        백엔드 서빙 연동
+      </h2>
+      <p class="lead">
+        정적으로 생성된 배경 이미지를 실제 세션에서 사용하기 위해,
+        GM 응답에 장소 신호를 삽입하고 프론트가 이를 읽어 배경을 교체하는 구조를 설계했다.
+      </p>
+
+      <div class="bgserve-board">
+        <div class="bgserve-panel">
+          <div class="bgserve-label">Step 10 · Signal Design</div>
+          <h3>GM 응답 끝에 장소 태그를 남긴다</h3>
+          <p>
+            <code>prompts/trpg_rules.txt</code>에 배경 전환 규칙을 추가해,
+            GM이 현재 장면의 장소를 런타임에 명시하도록 했다.
+          </p>
+
+          <div class="tag-example">
+            <span>GM output suffix</span>
+            <b>[장소: 거실]</b>
+          </div>
+
+          <div class="rule-strip">
+            <div>
+              <strong>Trigger</strong>
+              <span>장소가 새로 정해지거나 바뀐 턴</span>
+            </div>
+            <div>
+              <strong>Format</strong>
+              <span>응답 맨 끝 한 줄, 시나리오 장소명 그대로</span>
+            </div>
+            <div>
+              <strong>Fallback</strong>
+              <span>이미지 없는 장소는 프론트에서 이전 배경 유지</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bgserve-panel">
+          <div class="bgserve-label">Step 11 · Asset Serving</div>
+          <h3>태그를 파싱해 이미지 URL로 바꾼다</h3>
+          <p>
+            백엔드는 생성된 배경·캐릭터 이미지를 정적 자산처럼 서빙하고,
+            프론트는 GM 응답의 장소 태그를 읽어 배경 state를 갱신한다.
+          </p>
+
+          <div class="route-map">
+            <div class="route-row">
+              <code>generated_assets/backgrounds</code>
+              <span>장소 배경 이미지 저장</span>
+            </div>
+            <div class="route-row">
+              <code>GET /background/{location}</code>
+              <span>장소명에 맞는 배경 반환</span>
+            </div>
+            <div class="route-row">
+              <code>GET /character/{role}</code>
+              <span>PC/KPC 초상화 반환</span>
+            </div>
+            <div class="route-row">
+              <code>applyLocationBackground(text)</code>
+              <span>GM 응답에서 장소 태그 파싱</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bgserve-flow">
+        <span>GM Response</span>
+        <b>→</b>
+        <span>[장소: X]</span>
+        <b>→</b>
+        <span>Regex Parse</span>
+        <b>→</b>
+        <span>GET Background</span>
+        <b>→</b>
+        <span>UI Update</span>
+      </div>
+
+      <div class="takeaway">
+        장소 태그 규칙은 scene_public을 직접 수정하지 않고도 런타임 분기 어디서나 배경 교체가 동작하게 만드는 핵심 설계다.
+      </div>
+    </section>
+    <section class="slide paper" id="portrait">
+      <div class="no">
+        20 / Character Portrait
+      </div>
+      <h2 class="section-title">
+        캐릭터 초상화 생성
+      </h2>
+      <div class="grid">
+        <div>
+          <p class="lead">
+            인물 초상화는 세션 생성 시 KPC 인적 사항과 persona.json을 바탕으로 appearance.json을
+            생성하고, 이미지 API에 전달해 고정 seed 초상화를 만든 뒤 DB에 저장한다.
+          </p>
+          <div class="flow">
+            <span>
+              persona.json
+            </span>
+            <b>
+              →
+            </b>
+            <span>
+              appearance.json
+            </span>
+            <b>
+              →
+            </b>
+            <span>
+              Image
+              API
+            </span>
+            <b>
+              →
+            </b>
+            <span>
+              Portrait PNG
+            </span>
+            <b>
+              →
+            </b>
+            <span>
+              DB 저장
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="updatedarch">
+      <div class="no">
+        21 / Integrated System Architecture
+      </div>
+      <h2 class="section-title">
+        텍스트와 이미지를 통합한 세션 출력 구조
+      </h2>
+      <p class="lead">
+        최종 구조는 AI-GM 세션 루프와 이미지 생성 레이어가 분리된 기능이 아니라,
+        하나의 세션 출력 구조 안에서 함께 작동하도록 설계되었다.
+        LLM과 RAG가 장면·판정·캐릭터 반응을 생성하면, Image API는 해당 장면과 캐릭터 상태를 시각 자료로 변환해
+        텍스트와 이미지가 결합된 세션 화면을 구성한다.
+      </p>
+      <div class="diagram">
+        <svg viewBox="0 0 1000 470">
+          <defs>
+            <marker id="ar3" markerHeight="10" markerWidth="10" orient="auto" refX="8" refY="3">
+              <path d="M0,0 L0,6 L9,3 z" fill="#fff">
+              </path>
+            </marker>
+          </defs>
+          <g fill="none" stroke="#777">
+            <rect height="90" rx="8" width="220" x="40" y="45">
+            </rect>
+            <rect height="90" rx="8" width="220" x="390" y="45">
+            </rect>
+            <rect height="90" rx="8" width="220" x="740" y="45">
+            </rect>
+            <rect height="95" rx="8" width="260" x="210" y="215">
+            </rect>
+            <rect height="95" rx="8" width="260" x="550" y="215">
+            </rect>
+            <rect height="68" rx="8" width="360" x="320" y="370">
+            </rect>
+          </g>
+          <g fill="#fff" font-size="20" font-weight="800">
+            <text text-anchor="middle" x="150" y="92">
+              Front-End
+            </text>
+            <text text-anchor="middle" x="500" y="92">
+              Back-End
+            </text>
+            <text text-anchor="middle" x="850" y="92">
+              LLM + RAG
+            </text>
+            <text text-anchor="middle" x="340" y="254">
+              MongoDB
+            </text>
+            <text text-anchor="middle" x="680" y="254">
+              Image API
+            </text>
+            <text text-anchor="middle" x="500" y="412">
+              Session Output: Text + Image
+            </text>
+          </g>
+          <g fill="#aaa" font-size="14">
+            <text text-anchor="middle" x="150" y="117">
+              chat / scenario / stat UI
+            </text>
+            <text text-anchor="middle" x="500" y="117">
+              FastAPI session loop
+            </text>
+            <text text-anchor="middle" x="850" y="117">
+              GM · KPC · judgment
+            </text>
+            <text text-anchor="middle" x="340" y="280">
+              chat_log / character / PNG
+            </text>
+            <text text-anchor="middle" x="680" y="280">
+              static background / character portrait
+            </text>
+          </g>
+          <g fill="none" marker-end="url(#ar3)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M260 90 H390">
+            </path>
+            <path d="M610 90 H740">
+            </path>
+            <path d="M500 135 V175 H680 V215">
+            </path>
+            <path d="M550 260 H470">
+            </path>
+            <path d="M680 310 V370">
+            </path>
+            <path d="M340 310 V370">
+            </path>
+            <path d="M320 418 C210 418 150 325 150 135">
+            </path>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="slide paper" id="demo-output">
+      <div class="no">
+        22 / Final Output &amp; Demo UI
+      </div>
+
+      <h2 class="section-title">
+        최종 구현 결과:
+        <br />
+        비주얼 노벨형 TRPG 세션 UI
+      </h2>
+
+      <p class="lead">
+        최종 결과물은 AI-GM의 응답을 단순 채팅으로 출력하지 않고,
+        배경 이미지, 캐릭터 스탠딩 이미지, 초상화 기반 채팅 UI를 결합해
+        실제 비주얼 노벨처럼 세션이 진행되는 화면으로 구현되었다.
+      </p>
+
+      <div class="demo-gallery">
+        <div class="demo-shot">
+          <img alt="실낙원 현관 장면 데모 UI" src="BetterGMThanYours_readable_assets/demo_ui_entrance.png" />
+          <div class="caption">
+            배경 이미지 위에 PC/KPC 스탠딩 이미지를 합성한 실제 세션 화면
+          </div>
+        </div>
+
+        <div class="demo-shot">
+          <img alt="실낙원 거실 장면 데모 UI" src="BetterGMThanYours_readable_assets/demo_ui_livingroom.png" />
+          <div class="caption">
+            장소 태그에 따라 배경이 전환되고, 캐릭터 강조 상태가 달라지는 화면
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-feature-box">
+        <span class="demo-kicker">Why this UI works</span>
+        <div class="demo-feature-grid">
+          <div class="demo-feature">
+            <b>Visual Novel Layout</b>
+            <p>
+              현재 장소를 배경으로 표시하고 PC/KPC를 스탠딩 이미지로 배치해
+              텍스트 세션을 장면 중심 화면으로 전환한다.
+            </p>
+          </div>
+
+          <div class="demo-feature">
+            <b>Character Focus</b>
+            <p>
+              말하는 캐릭터는 앞으로 오고, 말하지 않는 캐릭터는 dim 처리해
+              대화의 주체를 직관적으로 보여준다.
+            </p>
+          </div>
+
+          <div class="demo-feature">
+            <b>Portrait Chat</b>
+            <p>
+              오른쪽 채팅 로그에는 캐릭터 초상화 기반 프로필 이미지를 함께 출력해
+              GM·PC·KPC 발화를 시각적으로 구분한다.
+            </p>
+          </div>
+
+          <div class="demo-feature">
+            <b>Layered Composition</b>
+            <p>
+              배경·스탠딩·초상화를 분리된 레이어로 관리해
+              장면 전환과 캐릭터 연출을 독립적으로 처리할 수 있다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        최종 UI는 AI-GM의 응답을 “읽는 채팅”이 아니라,
+        배경·캐릭터·초상화가 함께 반응하는 “플레이 가능한 장면”으로 변환한다.
+      </div>
+    </section>
+
+    <section class="slide" id="artifact">
+      <div class="no">
+        23 / Analysis &amp; Design Artifacts
+      </div>
+      <h2 class="section-title">
+        분석·설계 산출물
+      </h2>
+      <p class="lead">
+        최종 결과 보고서 요구사항에 맞추어 Use Case Diagram, Sequence Diagram, WBS를 보고서 내
+        산출물로 포함한다.
+      </p>
+      <h3 class="mini-title">
+        Use Case Diagram
+      </h3>
+      <div class="imgbox">
+        <img alt="Better GM Than Yours Use Case Diagram" src="BetterGMThanYours_readable_assets/use_case_diagram.svg" />
+      </div>
+      <br />
+      <h3 class="mini-title">
+        Sequence Diagram — 세션 진행 및 판정
+      </h3>
+      <div class="diagram">
+        <svg viewbox="0 0 1000 540">
+          <defs>
+            <marker id="seq" markerheight="10" markerwidth="10" orient="auto" refx="8" refy="3">
+              <path d="M0,0 L0,6 L9,3 z" fill="#111">
+              </path>
+            </marker>
+          </defs>
+          <g fill="#111" font-size="15" font-weight="800">
+            <text text-anchor="middle" x="90" y="40">
+              User
+            </text>
+            <text text-anchor="middle" x="250" y="40">
+              Front-End
+            </text>
+            <text text-anchor="middle" x="430" y="40">
+              Back-End
+            </text>
+            <text text-anchor="middle" x="610" y="40">
+              RAG
+            </text>
+            <text text-anchor="middle" x="780" y="40">
+              LLM
+            </text>
+            <text text-anchor="middle" x="930" y="40">
+              DB
+            </text>
+          </g>
+          <g stroke="#999" stroke-dasharray="5 5">
+            <path d="M90 55 V500">
+            </path>
+            <path d="M250 55 V500">
+            </path>
+            <path d="M430 55 V500">
+            </path>
+            <path d="M610 55 V500">
+            </path>
+            <path d="M780 55 V500">
+            </path>
+            <path d="M930 55 V500">
+            </path>
+          </g>
+          <g fill="none" marker-end="url(#seq)" stroke="#111">
+            <path d="M90 95 H250">
+            </path>
+            <path d="M250 135 H430">
+            </path>
+            <path d="M430 175 H930">
+            </path>
+            <path d="M430 220 H780">
+            </path>
+            <path d="M780 260 H430">
+            </path>
+            <path d="M430 300 H610">
+            </path>
+            <path d="M610 340 H430">
+            </path>
+            <path d="M430 380 H780">
+            </path>
+            <path d="M780 420 H430">
+            </path>
+            <path d="M430 460 H250">
+            </path>
+            <path d="M250 490 H90">
+            </path>
+          </g>
+          <g fill="#111" font-size="13">
+            <text text-anchor="middle" x="170" y="88">
+              행동 입력
+            </text>
+            <text text-anchor="middle" x="340" y="128">
+              API 요청
+            </text>
+            <text text-anchor="middle" x="680" y="168">
+              chat_log / state 저장
+            </text>
+            <text text-anchor="middle" x="605" y="213">
+              GM/KPC 응답 생성
+            </text>
+            <text text-anchor="middle" x="605" y="253">
+              응답 반환
+            </text>
+            <text text-anchor="middle" x="520" y="293">
+              판정 필요 시 top-k 검색
+            </text>
+            <text text-anchor="middle" x="520" y="333">
+              룰 조항 반환
+            </text>
+            <text text-anchor="middle" x="605" y="373">
+              판정 내러티브 생성
+            </text>
+            <text text-anchor="middle" x="605" y="413">
+              GM/KPC 출력
+            </text>
+            <text text-anchor="middle" x="340" y="453">
+              화면 갱신
+            </text>
+            <text text-anchor="middle" x="170" y="483">
+              다음 입력 대기
+            </text>
+          </g>
+        </svg>
+      </div>
+      <h3 class="mini-title">
+        WBS — 작업 분해 구조
+      </h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>
+                대분류
+              </th>
+              <th>
+                세부 작업
+              </th>
+              <th>
+                산출물
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                1. 기획
+              </td>
+              <td>
+                TRPG 문제 정의, 기존 서비스 분석, 구현 범위 설정
+              </td>
+              <td>
+                프로젝트 구조, 기능 범위, 시나리오 조건
+              </td>
+            </tr>
+            <tr>
+              <td>
+                2. 세션 엔진
+              </td>
+              <td>
+                턴 기반 루프, scene_public 파싱, END OF SECTION 처리
+              </td>
+              <td>
+                세션 진행 로직
+              </td>
+            </tr>
+            <tr>
+              <td>
+                3. 판정 시스템
+              </td>
+              <td>
+                /dice, dicejudgement(), RAG 검색, 판정 내러티브
+              </td>
+              <td>
+                룰 기반 판정 흐름
+              </td>
+            </tr>
+            <tr>
+              <td>
+                4. 인격 엔진
+              </td>
+              <td>
+                persona.json, Big Five, 관계축, kpc_block 생성
+              </td>
+              <td>
+                KPC 성격 반응 모듈
+              </td>
+            </tr>
+            <tr>
+              <td>
+                5. 프롬프트 안정화
+              </td>
+              <td>
+                Constraint Grounding, Context Packing, Self-Check, Scaffolding
+              </td>
+              <td>
+                오작동 개선 프롬프트
+              </td>
+            </tr>
+            <tr>
+              <td>
+                6. 이미지 모듈
+              </td>
+              <td>
+                Static 배경, 인물 초상화, [장소: X] 태그 + 백엔드 서빙
+              </td>
+              <td>
+                PNG 이미지 산출물 및 파이프라인
+              </td>
+            </tr>
+            <tr>
+              <td>
+                7. 사업화
+              </td>
+              <td>
+                시장 분석, BM, 로드맵, 저작권 대응
+              </td>
+              <td>
+                창업 플랜
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="slide" id="startup">
+      <div class="no">
+        24 / Startup Plan
+      </div>
+      <h2 class="section-title">
+        창업 플랜
+      </h2>
+      <p class="lead">
+        사업화 섹션은 창업플랜 보고서의 내용을 후반부에 통합한다. 본 프로젝트의 시장 포지션은
+        “세션 완결을 보장하는 룰 기반 AI-GM 플랫폼”이다.
+      </p>
+      <div class="grid g3" style="margin-top: 30px">
+        <div class="card">
+          <h4>
+            1차 타겟
+          </h4>
+          <p>
+            GM 구하기 어려운 경험이 있는 15-35세 TRPG 팬.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            2차 타겟
+          </h4>
+          <p>
+            텍스트 기반 스토리 게임을 즐기는 라이트 게이머.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            3차 타겟
+          </h4>
+          <p>
+            AI·창작 콘텐츠 소비에 익숙한 디지털 네이티브.
+          </p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>
+                수익 모델
+              </th>
+              <th>
+                내용
+              </th>
+              <th>
+                의미
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                구독 기반 모델
+              </td>
+              <td>
+                무료 체험 / 월정액 프리미엄 / 무제한 플레이 / 기록 저장
+              </td>
+              <td>
+                반복 매출 구조, API 비용과 연동
+              </td>
+            </tr>
+            <tr>
+              <td>
+                콘텐츠 판매
+              </td>
+              <td>
+                프리미엄 시나리오, 장편 캠페인, 캐릭터 패키지
+              </td>
+              <td>
+                UGC 마켓플레이스 확장 기반
+              </td>
+            </tr>
+            <tr>
+              <td>
+                AI 기능 차등 과금
+              </td>
+              <td>
+                장기 기억, 감정 추적, 관계 변화 시뮬레이션
+              </td>
+              <td>
+                AI 능력을 상품 가치로 전환
+              </td>
+            </tr>
+            <tr>
+              <td>
+                교육·창작 시장
+              </td>
+              <td>
+                시나리오 작가 도구, 게임 기획 교육, 심리 상담 시뮬레이션
+              </td>
+              <td>
+                B2B·에듀테크 확장 가능성
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="slide paper" id="business">
+      <div class="no">
+        25 / 3C · SWOT · STP
+      </div>
+      <h2 class="section-title">
+        사업 분석 요약
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 TRPG 커뮤니티의 GM 부족 문제와 1인·비정기 플레이 수요를 기반으로,
+        룰 기반 AI-GM 플랫폼이라는 포지션을 가진다.
+      </p>
+      <div class="biz-strip">
+        <div class="biz-mini">
+          <span>
+            3C
+          </span>
+          <p>
+            <b>
+              Customer
+            </b>
+            온라인 TRPG 커뮤니티, 스토리 게임 유저, AI 창작 콘텐츠 소비자
+            <br />
+            <b>
+              Competitor
+            </b>
+            GPTRPG, ZETA, Character.AI, Roll20, CCFOLIA
+            <br />
+            <b>
+              Company
+            </b>
+            CoC 7판 RAG 판정 엔진, KPC 인격 엔진, 프롬프트 안정화 노하우
+          </p>
+        </div>
+        <div class="biz-mini">
+          <span>
+            STP
+          </span>
+          <p>
+            <b>
+              Segmentation
+            </b>
+            코어 TRPG 팬, 스토리 게임 라이트 유저, AI 창작 콘텐츠 소비자
+            <br />
+            <b>
+              Targeting
+            </b>
+            15-30세 온라인 TRPG 커뮤니티
+            <br />
+            <b>
+              Positioning
+            </b>
+            세션 완결을 보장하는 룰 기반 AI-GM 플랫폼
+          </p>
+        </div>
+      </div>
+      <div class="swot-board">
+        <div class="swot-head positive">
+          Positive
+        </div>
+        <div class="swot-head negative">
+          Negative
+        </div>
+        <div class="swot-side internal">
+          Internal
+        </div>
+        <div class="swot-side external">
+          External
+        </div>
+        <div class="swot-quad strength">
+          <div class="swot-letter">
+            S
+          </div>
+          <div class="swot-content">
+            <h3>
+              Strengths
+            </h3>
+            <ul>
+              <li>
+                TRPG 세션 진행에 특화된 AI-GM 구조
+              </li>
+              <li>
+                룰북 RAG, 캐릭터 데이터, 시나리오 정보를 통합한 세션 생성 방식
+              </li>
+              <li>
+                GM 부족과 일정 조율 부담을 줄이는 명확한 문제 해결성
+              </li>
+              <li>
+                시나리오 배경 이미지 UI를 통한 몰입감 강화
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="swot-quad weakness">
+          <div class="swot-letter">
+            W
+          </div>
+          <div class="swot-content">
+            <h3>
+              Weaknesses
+            </h3>
+            <ul>
+              <li>
+                초기 구현 범위가 CoC 7판과 특정 시나리오에 집중됨
+              </li>
+              <li>
+                장기 세션에서 컨텍스트 유지와 규칙 일관성 검증 필요
+              </li>
+              <li>
+                LLM 응답 품질이 모델 성능과 프롬프트 설계에 의존함
+              </li>
+              <li>
+                이미지 생성 결과의 안정성과 비용 관리가 추가 과제로 남음
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="swot-quad opportunity">
+          <div class="swot-letter">
+            O
+          </div>
+          <div class="swot-content">
+            <h3>
+              Opportunities
+            </h3>
+            <ul>
+              <li>
+                TRPG 입문자, 1인 플레이어, 비정기 플레이어 대상 수요 존재
+              </li>
+              <li>
+                팬메이드 시나리오 업로드와 마켓플레이스 확장 가능성
+              </li>
+              <li>
+                D&amp;D, 인세인 등 다중 룰북으로 확장 가능한 구조
+              </li>
+              <li>
+                스트리밍, 커뮤니티, IP 협업과 연결 가능한 콘텐츠형 서비스
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="swot-quad threat">
+          <div class="swot-letter">
+            T
+          </div>
+          <div class="swot-content">
+            <h3>
+              Threats
+            </h3>
+            <ul>
+              <li>
+                ChatGPT, Character.AI 등 범용 AI 대화 서비스와의 기능 중복 인식
+              </li>
+              <li>
+                룰북과 팬메이드 시나리오 사용에 따른 저작권·라이선스 이슈
+              </li>
+              <li>
+                TRPG 시장 자체가 니치하여 초기 유저 확보 전략이 중요함
+              </li>
+              <li>
+                AI 생성 결과의 예측 불가능성이 세션 몰입을 해칠 가능성
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="roadmap">
+      <div class="no">
+        26 / Business Roadmap
+      </div>
+      <h2 class="section-title">
+        단계별 사업화 로드맵
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 CoC 7판 기반 세션 안정화에서 출발해,
+        유료화 모델과 다중 룰북 확장을 거쳐 시나리오 마켓플레이스와 글로벌 TRPG 시장으로 확장하는 단계적 사업화 전략을 가진다.
+      </p>
+      <div class="roadmap-chart">
+        <svg aria-label="Business roadmap line chart" class="roadmap-svg" viewbox="0 0 1000 430">
+          <g>
+            <line class="roadmap-grid" x1="90" x2="920" y1="80" y2="80">
+            </line>
+            <line class="roadmap-grid" x1="90" x2="920" y1="160" y2="160">
+            </line>
+            <line class="roadmap-grid" x1="90" x2="920" y1="240" y2="240">
+            </line>
+            <line class="roadmap-grid" x1="90" x2="920" y1="320" y2="320">
+            </line>
+            <line class="roadmap-axis" x1="90" x2="930" y1="335" y2="335">
+            </line>
+            <line class="roadmap-axis" x1="90" x2="90" y1="60" y2="335">
+            </line>
+            <text class="roadmap-time" text-anchor="middle" x="90" y="370">
+              NOW
+            </text>
+            <text class="roadmap-time" text-anchor="middle" x="300" y="370">
+              ~ 6 MONTHS
+            </text>
+            <text class="roadmap-time" text-anchor="middle" x="575" y="370">
+              6-18 MONTHS
+            </text>
+            <text class="roadmap-time" text-anchor="middle" x="850" y="370">
+              18 MONTHS +
+            </text>
+            <text class="roadmap-sub" text-anchor="middle" x="42" y="325">
+              검증
+            </text>
+            <text class="roadmap-sub" text-anchor="middle" x="42" y="245">
+              안정화
+            </text>
+            <text class="roadmap-sub" text-anchor="middle" x="42" y="165">
+              확장
+            </text>
+            <text class="roadmap-sub" text-anchor="middle" x="42" y="85">
+              사업화
+            </text>
+          </g>
+          <polyline class="roadmap-line" points="90,310 300,245 575,155 850,80">
+          </polyline>
+          <g>
+            <circle class="roadmap-dot" cx="90" cy="310" r="10">
+            </circle>
+            <text class="roadmap-label" x="110" y="303">
+              Prototype
+            </text>
+            <text class="roadmap-sub" x="110" y="324">
+              세션 루프 구현
+            </text>
+          </g>
+          <g>
+            <circle class="roadmap-dot" cx="300" cy="245" r="10">
+            </circle>
+            <text class="roadmap-label" x="320" y="238">
+              Open Beta
+            </text>
+            <text class="roadmap-sub" x="320" y="259">
+              CoC 7판 안정화 · 초기 유저 500명
+            </text>
+          </g>
+          <g>
+            <circle class="roadmap-dot" cx="575" cy="155" r="10">
+            </circle>
+            <text class="roadmap-label" x="595" y="148">
+              Premium Expansion
+            </text>
+            <text class="roadmap-sub" x="595" y="169">
+              구독 모델 · 다중 룰북 · 멀티플레이
+            </text>
+          </g>
+          <g>
+            <circle class="roadmap-dot" cx="850" cy="80" r="10">
+            </circle>
+            <text class="roadmap-label" x="690" y="54">
+              Marketplace
+            </text>
+            <text class="roadmap-sub" x="690" y="75">
+              시나리오 스토어 · 글로벌 확장 · IP 협업
+            </text>
+          </g>
+        </svg>
+        <div class="roadmap-caption-grid">
+          <div class="roadmap-caption">
+            <b>
+              1단계: 세션 안정화
+            </b>
+            <p>
+              CoC 7판 세션 완결성, 오픈 베타, 초기 유저 확보, 팬메이드 업로드 기능을 안정화한다.
+            </p>
+          </div>
+          <div class="roadmap-caption">
+            <b>
+              2단계: 서비스 확장
+            </b>
+            <p>
+              프리미엄 구독 모델을 도입하고 D&amp;D 5e 등 룰북 1-2종, 멀티플레이, 이미지·배경음악 기능을 추가한다.
+            </p>
+          </div>
+          <div class="roadmap-caption">
+            <b>
+              3단계: 플랫폼화
+            </b>
+            <p>
+              시나리오 마켓플레이스, 일본·영어권 TRPG 시장 진출, IP 협업 및 스트리밍 연계를 추진한다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="mentor">
+      <div class="no">
+        27 / Mentoring Feedback
+      </div>
+      <h2 class="section-title">
+        멘토링 내용과 반영 계획
+      </h2>
+      <p class="lead">
+        카카오 정재웅 멘토는 프로젝트가 단순 챗봇이 아니라 판정 시스템, 룰북 기반 RAG,
+        캐릭터 성격 모델을 포함한 실제 세션 진행 시스템으로 설계되었다는 점을 긍정적으로 평가했다.
+        동시에 서비스화를 위해서는 GM 자동화의 안정성, 장기 컨텍스트 유지, 검증 체계가 중요하다고 피드백했다.
+      </p>
+
+      <div class="mentor-board">
+        <div class="mentor-item">
+          <b>구현 범위 재정렬</b>
+          <p>
+            이미지·표정 기능도 의미 있지만, 핵심 가치는 GM 자동화의 안정성과 세션 완결성에 있다.
+          </p>
+          <p class="plan">
+            향후 개발 우선순위를 GM 진행 정확도와 룰 기반 세션 완결성으로 재정렬한다.
+          </p>
+        </div>
+
+        <div class="mentor-item">
+          <b>긴 세션 맥락 유지</b>
+          <p>
+            최신 대화 몇 개만 입력하는 방식은 장기 세션에서 맥락 손실을 만들 수 있다.
+          </p>
+          <p class="plan">
+            전체 로그의 주기적 요약, 최신 데이터 가중치, 상태 메모리 구조를 도입한다.
+          </p>
+        </div>
+
+        <div class="mentor-item">
+          <b>LLM 게임 정확도 검증</b>
+          <p>
+            일반 unittest와 달리 룰 준수, 판정 일관성, secret leakage 등 별도 평가 기준이 필요하다.
+          </p>
+          <p class="plan">
+            룰 준수율, 판정 일관성, 섹션 종료 성공률, 비밀 정보 노출 여부를 평가 지표로 설계한다.
+          </p>
+        </div>
+
+        <div class="mentor-item">
+          <b>룰 확장과 스토어</b>
+          <p>
+            다중 룰북과 시나리오 공유 구조는 서비스 확장성과 커뮤니티 생태계의 핵심이다.
+          </p>
+          <p class="plan">
+            D&amp;D 5e 등 추가 룰 실험과 시나리오 공유·판매 마켓플레이스를 검토한다.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="limitations">
+      <div class="no">
+        28 / Limitations &amp; Future Work
+      </div>
+      <h2 class="section-title">
+        한계와 향후 계획
+      </h2>
+      <p class="lead">
+        현재 구현은 단일 룰북과 1인 플레이 중심으로 안정화되어 있다.
+        다음 단계에서는 장기 세션, 다중 룰북, 멀티플레이, 저작권 리스크 관리까지 확장해야 한다.
+      </p>
+
+      <div class="future-board">
+        <div class="future-lane">
+          <span class="future-kicker">Current Limitations</span>
+          <h3>현재 한계</h3>
+
+          <div class="future-pair">
+            <div>
+              <b>CoC 7판 중심 구현</b>
+              <span>현재 판정 로직과 RAG 구조는 Call of Cthulhu 7판에 가장 강하게 맞춰져 있다.</span>
+            </div>
+            <div>
+              <b>긴 세션 맥락 손실 가능성</b>
+              <span>대화가 길어질수록 이전 선택, 단서, 감정선이 약해질 수 있다.</span>
+            </div>
+            <div>
+              <b>멀티플레이 미지원</b>
+              <span>여러 플레이어의 발화, 캐릭터 상태, 턴 순서를 동시에 관리하는 구조는 아직 제한적이다.</span>
+            </div>
+            <div>
+              <b>저작권 리스크</b>
+              <span>팬메이드 시나리오와 룰북 데이터를 서비스에 포함할 때 권리 문제가 발생할 수 있다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="future-lane">
+          <span class="future-kicker">Next Development</span>
+          <h3>향후 개선</h3>
+
+          <div class="future-pair">
+            <div>
+              <b>요약 메모리 구조</b>
+              <span>전체 로그 요약과 최신 대화 가중치를 결합해 장기 세션의 맥락을 유지한다.</span>
+            </div>
+            <div>
+              <b>룰 준수 평가 시스템</b>
+              <span>판정 일관성, secret leakage, 섹션 종료 성공률을 정량 지표로 검증한다.</span>
+            </div>
+            <div>
+              <b>다중 룰북·멀티플레이 확장</b>
+              <span>CoC 외 룰북과 다중 플레이어 입력을 처리할 수 있는 세션 상태 구조로 확장한다.</span>
+            </div>
+            <div>
+              <b>시나리오 생태계 검토</b>
+              <span>자체 시나리오 제작, 외주, 학과 협업, 공유·판매 스토어 구조를 검토한다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="copyright">
+      <div class="no">
+        29 / Copyright Considerations
+      </div>
+      <h2 class="section-title">
+        저작권 대응
+      </h2>
+      <p class="lead">
+        초기에는 한국어문학과 P실무와 협업해 비선형 스토리 기반 게임 시나리오를 직접 제작하는
+        방향도 고려했으나, 실험 범위와 구현 우선순위를 고려해 기존 공개 시나리오를 연구·실험용 입력
+        데이터로 활용하는 방향을 택했다.
+      </p>
+      <div class="grid g3" style="margin-top: 28px">
+        <div class="card">
+          <h4>
+            현재 사용 방식
+          </h4>
+          <p>
+            웹에 개인 사용 전제로 공개된 기존 시나리오를 참고용으로 활용. 연구·실험용 입력 데이터
+            위치.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            배포 대응
+          </h4>
+          <p>
+            GitHub 배포 시 시나리오 파일 제외. 시나리오를 포함한 재배포 없음. 현재 단계는 클로즈드
+            베타.
+          </p>
+        </div>
+        <div class="card">
+          <h4>
+            향후 계획
+          </h4>
+          <p>
+            후속 단계에서 자체 시나리오 직접 작성 또는 외주/학과 간 협업을 통한 신규 시나리오
+            제작 검토.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="slide" id="github">
+      <div class="no">
+        30 / Repository
+      </div>
+      <h2 class="section-title">
+        Repository
+      </h2>
+      <p class="lead">
+        프로젝트 코드는 GitHub 저장소를 통해 관리한다.
+      </p>
+      <div class="imgbox" style="margin-top: 28px">
+        <img alt="GitHub repository screenshot" src="BetterGMThanYours_readable_assets/image_12_c018bd3325.png" />
+        <div class="caption">
+          github.com/minju5054/GraduationPJ-TRPG
+        </div>
+      </div>
+    </section>
+    <section class="slide paper" id="references">
+      <div class="no">
+        31 / References
+      </div>
+      <h2 class="section-title">
+        References
+      </h2>
+      <div class="ref-grid">
+        <div>
+          <h3 class="mini-title">
+            TRPG 시나리오 및 플레이 자료
+          </h3>
+          <ol class="reference">
+            <li>
+              無題. CoC 시나리오 실낙원: Paradise Lost: Fiat. Postype.
+            </li>
+            <li>
+              피터슨, S., 메이슨, M., 프리커, P., &amp; 윌리스, L. 크툴루의 부름: 수호자 룰북. 초여명.
+            </li>
+            <li>
+              유칼리. CoC 캐릭터 시트 작성 방법. Postype.
+            </li>
+            <li>
+              향영. [롤20 최적화] CoC 7th 캐릭터 자동화 시트.
+            </li>
+            <li>
+              Girl’s School. 코코포리아 플레이어용 간단 이용법.
+            </li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="mini-title">
+            AI·NLP·심리학 참고문헌
+          </h3>
+          <ol class="reference" start="6">
+            <li>
+              Lewis et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.
+            </li>
+            <li>
+              Wang et al. Self-Consistency Improves Chain of Thought Reasoning in Language Models.
+            </li>
+            <li>
+              Liu et al. Lost in the Middle: How Language Models Use Long Contexts.
+            </li>
+            <li>
+              Hirschfeld et al. A Measure of Interpersonal Dependency.
+            </li>
+            <li>
+              Ainsworth et al. Patterns of Attachment.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- <h3 class="mini-title">통합 반영 자료</h3>
+      <div class="grid g2">
+        <div class="src">
+          발표자료 PPTX: 메인 서사, 디자인 톤, 기술 흐름, 참고문헌, 저작권 고려사항.
+        </div>
+        <div class="src">과제계획서 PDF: 구현 세부사항, 이미지 생성 모듈, 표정 파이프라인.</div>
+        <div class="src">창업플랜 DOCX: 시장 분석, 3C/SWOT/STP/4P, 수익 모델, 로드맵.</div>
+        <div class="src">지도보고서 PDF: 멘토링 평가, 개선 방향, 서비스화 피드백.</div>
+      </div> -->
+    </section>
+    <section class="slide hero" id="end">
+      <div class="kicker">
+        Final Statement
+      </div>
+      <h2 class="big-title">
+        AI-GM as
+        <br />
+        a Session Engine
+      </h2>
+      <p class="lead">
+        Better GM Than Yours는 LLM을 단순한 캐릭터 챗봇이 아니라, 룰·판정·서사·진행·캐릭터
+        반응·스토리 시각화를 통합하는 TRPG 세션 엔진으로 설계했다.
+      </p>
+    </section>
+  </main>
+  <footer class="footer">
+    Better GM Than Yours · 4조 밥사조 · 최종 결과 보고서
+  </footer>
+  <script>
+    const navLinks = [...document.querySelectorAll(".nav a")];
+    const ids = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            navLinks.forEach((a) => (a.style.background = ""));
+            const cur = navLinks.find((a) => a.getAttribute("href") === "#" + e.target.id);
+            if (cur) {
+              cur.style.background = "#fff";
+              cur.style.color = "#000";
+              cur.style.borderColor = "#fff";
+            }
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+    ids.forEach((s) => io.observe(s));
+  </script>
+
+  <script>
+    (function () {
+      const button = document.getElementById("pdfExportButton");
+      if (!button) return;
+
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      function getFilenameFromHeader(header) {
+        if (!header) return null;
+        const match = header.match(/filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i);
+        const raw = match && (match[1] || match[2]);
+        return raw ? decodeURIComponent(raw) : null;
+      }
+
+      button.addEventListener("click", async () => {
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = "PDF 생성 중...";
+
+        try {
+          const pageUrl = window.location.href.split("#")[0];
+          const endpoint = `/api/export-pdf?url=${encodeURIComponent(pageUrl)}`;
+          const response = await fetch(endpoint, { method: "GET" });
+
+          if (!response.ok) {
+            const message = await response.text().catch(() => "");
+            throw new Error(message || `PDF export failed: ${response.status}`);
+          }
+
+          const blob = await response.blob();
+          const header = response.headers.get("Content-Disposition");
+          const filename = getFilenameFromHeader(header) || "BetterGMThanYours_final_report.pdf";
+          downloadBlob(blob, filename);
+        } catch (error) {
+          console.error(error);
+          alert(
+            "Puppeteer PDF export API에 연결하지 못했어.\n" +
+            "Vite 서버에 제공한 puppeteer export middleware를 붙였는지 확인해줘."
+          );
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      });
+    })();
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+{
+  "character": {
+    "basic": {
+      "name": "",
+      "birthplace": "",
+      "gender": "male",
+      "job": "",
+      "playerName": "",
+      "residence": ""
+    },
+    "appearance": {
+      "age": null,
+      "hairColor": "",
+      "eyeColor": "",
+      "skinColor": "",
+      "heightCm": null,
+      "bodyType": "average",
+      "attractiveness": null,
+      "hasTattooOrScar": null,
+      "tattooOrScarDetail": "",
+      "hasAccessories": false,
+      "accessories": [],
+      "vibes": []
+    }
+  },
+  "options": {
+    "gender": ["male", "female", "other"],
+    "bodyType": ["slim", "average", "chubby", "muscular", "overweight"],
+    "accessories": ["earring", "necklace", "piercing", "ring", "bracelet", "other"],
+    "vibes": [
+      "강인한",
+      "잘생긴",
+      "볼품없는",
+      "예쁜",
+      "화려한",
+      "어려 보이는",
+      "똑똑한",
+      "지저분한",
+      "둔한",
+      "비열한",
+      "화사한",
+      "책벌레 같은",
+      "젊은",
+      "지친",
+      "통통한",
+      "다부진",
+      "털복숭이",
+      "날씬한",
+      "우아한",
+      "초라한",
+      "단단한",
+      "창백한",
+      "무뚝뚝한",
+      "평범한",
+      "혈색 좋은",
+      "그을린",
+      "주름진",
+      "음산한",
+      "조용한",
+      "날카로운",
+      "건장한",
+      "멋스러운",
+      "근육질의",
+      "듬직한",
+      "어색한",
+      "허약한"
+    ]
+  }
+}

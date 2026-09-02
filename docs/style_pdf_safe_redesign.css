@@ -1,0 +1,2924 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/* =========================================================
+     00. Design Tokens
+     ========================================================= */
+:root {
+    --bg: #070707;
+    --ink: #f7f7f4;
+    --muted: #9a9a9a;
+    --line: #2e2e2e;
+    --line2: #1a1a1a;
+
+    --paper: #f5f5f1;
+    --paper-ink: #0b0b0b;
+    --paper-muted: #606060;
+
+    --accent: #f2f2f2;
+    --hot: #d9d9d9;
+    --blue: #cbd5e1;
+    --cream: #f3efe4;
+
+    --max: 1180px;
+
+    --sans:
+        -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+        "Noto Sans KR", "Segoe UI", sans-serif;
+
+    --mono:
+        "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* =========================================================
+     01. Base
+     ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.68;
+    word-break: keep-all;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: inherit;
+}
+
+::selection {
+    background: #fff;
+    color: #000;
+}
+
+/* =========================================================
+     02. Header / Navigation
+     ========================================================= */
+.top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(7, 7, 7, 0.86);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line2);
+}
+
+.top-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 12px 26px;
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.brand small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: -4px;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+    margin-left: auto;
+}
+
+.nav a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: #b8b8b8;
+    font-size: 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 10px;
+}
+
+.nav a:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* =========================================================
+     03. Page / Slide Layout
+     ========================================================= */
+main {
+    max-width: var(--max);
+    margin: 0 auto;
+}
+
+.slide {
+    min-height: 92vh;
+    padding: 78px 26px 70px;
+    border-bottom: 1px solid var(--line2);
+    position: relative;
+}
+
+.slide.compact {
+    min-height: auto;
+}
+
+.slide.paper {
+    background: var(--paper);
+    color: var(--paper-ink);
+    margin: 72px 0;
+    border: 0;
+    border-radius: 0;
+    padding: 74px 52px;
+}
+
+.split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 42px;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+}
+
+.g2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.g3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.g4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* =========================================================
+     04. Typography
+     ========================================================= */
+.no {
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.paper .no {
+    color: #707070;
+}
+
+.kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #c8c8c8;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+}
+
+.paper .kicker {
+    color: #555;
+}
+
+.hero h1 {
+    font-size: clamp(58px, 12vw, 142px);
+    line-height: 0.87;
+    margin: 0;
+    letter-spacing: -0.06em;
+    font-weight: 900;
+}
+
+.hero .kr {
+    font-size: clamp(22px, 3.2vw, 36px);
+    font-weight: 700;
+    margin: 28px 0 0;
+}
+
+.hero .sub {
+    font-size: 20px;
+    color: #d6d6d6;
+    max-width: 790px;
+    margin-top: 22px;
+}
+
+.big-title {
+    font-size: clamp(48px, 8vw, 104px);
+    line-height: 0.92;
+    letter-spacing: -0.065em;
+    margin: 0 0 24px;
+    font-weight: 900;
+}
+
+.section-title {
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    margin: 0 0 18px;
+    font-weight: 900;
+}
+
+.mini-title {
+    font-size: 28px;
+    line-height: 1.1;
+    margin: 0 0 20px;
+    letter-spacing: -0.03em;
+}
+
+.lead {
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.55;
+    color: #d5d5d5;
+    max-width: 840px;
+}
+
+.paper .lead {
+    color: #333;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.paper .muted {
+    color: #666;
+}
+
+.reference {
+    font-size: 13px;
+    color: #bcbcbc;
+}
+
+.paper .reference {
+    color: #444;
+}
+
+/* =========================================================
+     05. Common Components
+     ========================================================= */
+.meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 50px;
+}
+
+.meta div {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    color: #d7d7d7;
+    font-size: 14px;
+}
+
+.meta b {
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.card {
+    border: 1px solid var(--line);
+    padding: 24px;
+    background: #0e0e0e;
+    min-height: 100%;
+}
+
+.paper .card {
+    background: #fff;
+    border-color: #d6d6d0;
+}
+
+.card h3,
+.card h4 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.card p {
+    margin: 0;
+    color: #c5c5c5;
+    font-size: 15px;
+}
+
+.paper .card p {
+    color: #555;
+}
+
+.numcard {
+    border: 1px solid var(--line);
+    padding: 20px;
+}
+
+.numcard .n {
+    font-size: 54px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.06em;
+}
+
+.numcard p {
+    margin: 10px 0 0;
+    color: #cfcfcf;
+}
+
+.pill {
+    display: inline-block;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #cfcfcf;
+    margin: 3px;
+}
+
+.paper .pill {
+    border-color: #ccc;
+    color: #444;
+    background: #fafafa;
+}
+
+.imgbox {
+    border: 1px solid var(--line);
+    background: #111;
+    padding: 10px;
+}
+
+.imgbox img {
+    width: 100%;
+    display: block;
+}
+
+.paper .imgbox {
+    border-color: #ddd;
+    background: #fff;
+}
+
+.caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+    text-align: center;
+    word-break: normal;
+}
+
+.quote {
+    border-left: 4px solid #fff;
+    padding-left: 22px;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin: 34px 0;
+    color: #fff;
+}
+
+.paper .quote {
+    border-left-color: #111;
+    color: #111;
+}
+
+.bullets {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.bullets li {
+    margin: 8px 0;
+    color: #d2d2d2;
+}
+
+.paper .bullets li {
+    color: #333;
+}
+
+.flow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 28px 0;
+}
+
+.flow span {
+    border: 1px solid var(--line);
+    padding: 12px 15px;
+    background: #0e0e0e;
+}
+
+.paper .flow span {
+    background: #fff;
+    border-color: #ccc;
+}
+
+.flow b {
+    font-size: 22px;
+    color: #777;
+}
+
+.mono {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: #101010;
+    border: 1px solid var(--line);
+    padding: 16px;
+    overflow: auto;
+    color: #e0e0e0;
+}
+
+.paper .mono {
+    background: #fff;
+    border-color: #ddd;
+    color: #111;
+}
+
+.diagram {
+    border: 1px solid var(--line);
+    background: #0d0d0d;
+    padding: 22px;
+    margin: 20px 0;
+}
+
+.paper .diagram {
+    background: #fff;
+    border-color: #d5d5d0;
+}
+
+.diagram svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #111;
+    background: #fff;
+    border-radius: 999px;
+    padding: 4px 9px;
+    font-weight: 800;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.paper .badge {
+    background: #111;
+    color: #fff;
+}
+
+.two-col-list {
+    columns: 2;
+    column-gap: 40px;
+}
+
+.two-col-list li {
+    break-inside: avoid;
+    margin: 5px 0;
+}
+
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.src {
+    border: 1px dashed var(--line);
+    padding: 18px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.paper .src {
+    border-color: #bbb;
+    color: #444;
+    background: #fff;
+}
+
+.footer {
+    padding: 42px 26px 80px;
+    color: #888;
+    font-size: 13px;
+}
+
+.printnote {
+    position: fixed;
+    right: 18px;
+    bottom: 16px;
+    z-index: 30;
+    background: #fff;
+    color: #000;
+    border-radius: 999px;
+    padding: 9px 13px;
+    font-size: 12px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================================
+     06. Tables
+     ========================================================= */
+.table-wrap {
+    overflow: auto;
+    margin: 20px 0;
+}
+
+.tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tbl th,
+.tbl td {
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    vertical-align: top;
+}
+
+.tbl th {
+    background: #151515;
+    text-align: left;
+    color: #fff;
+}
+
+.paper .tbl th {
+    background: #111;
+    color: #fff;
+}
+
+.paper .tbl td {
+    border-color: #d8d8d3;
+}
+
+.tbl td:first-child {
+    font-weight: 800;
+}
+
+.tbl.fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.tbl.fixed th,
+.tbl.fixed td {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+.tbl .center {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+/* =========================================================
+     07. Architecture Diagram
+     ========================================================= */
+.arch-diagram {
+    margin-top: 34px;
+    display: grid;
+    gap: 18px;
+}
+
+.arch-row {
+    display: grid;
+    grid-template-columns: 1fr 70px 1.25fr 70px 1fr;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.arch-group {
+    border: 1px solid var(--line);
+    background: #0e0e0e;
+    padding: 22px;
+}
+
+.paper .arch-group {
+    background: #fff;
+    border-color: #d6d6d0;
+}
+
+.arch-group h3 {
+    margin: 0 0 14px;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.arch-group p {
+    margin: 0;
+    color: #c5c5c5;
+    font-size: 14px;
+}
+
+.paper .arch-group p {
+    color: #555;
+}
+
+.arch-stack {
+    display: grid;
+    gap: 10px;
+}
+
+.arch-item {
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    background: #151515;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.paper .arch-item {
+    background: #fafafa;
+    border-color: #ddd;
+}
+
+.arch-item small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.arch-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-family: var(--mono);
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.arch-core {
+    border: 2px solid var(--paper-ink);
+    background: #111;
+    color: #fff;
+}
+
+.paper .arch-core {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+/* 가운데 핵심 박스 내부 항목은 밝게 처리해서 가독성 확보 */
+.arch-core .arch-item {
+    background: #fff;
+    color: #111;
+    border-color: #444;
+}
+
+.arch-core .arch-item small {
+    color: #555;
+}
+
+.arch-core p,
+.paper .arch-core p {
+    color: #d8d8d8;
+}
+
+.arch-note {
+    border: 1px dashed var(--line);
+    padding: 16px 18px;
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+.paper .arch-note {
+    border-color: #bbb;
+    color: #444;
+    background: #fff;
+}
+
+/* =========================================================
+     08. System Prompt Page
+     - 13-1 페이지가 class="slide"일 때 기준
+     ========================================================= */
+.prompt-layout {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.prompt-codebox {
+    border: 1px solid var(--line);
+    background: #0b0b0b;
+    padding: 22px;
+    overflow: auto;
+}
+
+.prompt-code {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.72;
+    color: #d1d5db;
+    white-space: pre;
+}
+
+.prompt-code .kw {
+    color: #60a5fa;
+    font-weight: 800;
+}
+
+.prompt-code .fn {
+    color: #e5e7eb;
+    font-weight: 800;
+}
+
+.prompt-code .var {
+    color: #cbd5e1;
+    font-weight: 700;
+}
+
+.prompt-code .str {
+    color: #a3e635;
+    font-weight: 700;
+}
+
+.prompt-code .slot {
+    color: #93c5fd;
+    font-weight: 900;
+    background: #111827;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 0 3px;
+}
+
+.prompt-code .comment {
+    color: #86efac;
+    font-weight: 800;
+}
+
+.prompt-explain {
+    display: grid;
+    gap: 14px;
+}
+
+.prompt-explain-item {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+}
+
+.prompt-explain-item:last-child {
+    border-bottom: 0;
+}
+
+.prompt-explain-num {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #fff;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.prompt-explain-item b {
+    display: block;
+    margin-bottom: 4px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.prompt-explain-item p {
+    margin: 0;
+    color: #c5c5c5;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+/* paper 슬라이드에서 재사용할 경우 자동으로 밝은 버전 */
+.paper .prompt-codebox {
+    border-color: #d6d6d0;
+    background: #fff;
+}
+
+.paper .prompt-code {
+    color: #334155;
+}
+
+.paper .prompt-code .kw {
+    color: #2563eb;
+}
+
+.paper .prompt-code .fn {
+    color: #475569;
+}
+
+.paper .prompt-code .var {
+    color: #64748b;
+}
+
+.paper .prompt-code .str,
+.paper .prompt-code .comment {
+    color: #65a30d;
+}
+
+.paper .prompt-code .slot {
+    color: #1d4ed8;
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+.paper .prompt-explain-item {
+    border-bottom-color: #d6d6d0;
+}
+
+.paper .prompt-explain-num {
+    border-color: #111;
+    color: #111;
+}
+
+.paper .prompt-explain-item b {
+    color: #111;
+}
+
+.paper .prompt-explain-item p {
+    color: #555;
+}
+
+/* =========================================================
+     09. Responsive
+     ========================================================= */
+@media (max-width: 820px) {
+    .top-inner {
+        padding: 10px 16px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .slide {
+        padding: 58px 18px;
+    }
+
+    .slide.paper {
+        margin: 20px 0;
+        padding: 48px 22px;
+    }
+
+    .g2,
+    .g3,
+    .g4,
+    .split,
+    .meta,
+    .ref-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-col-list {
+        columns: 1;
+    }
+
+    .hero h1 {
+        font-size: 64px;
+    }
+
+    .big-title {
+        font-size: 48px;
+    }
+
+    .section-title {
+        font-size: 42px;
+    }
+
+    .arch-row,
+    .prompt-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .arch-arrow {
+        transform: rotate(90deg);
+        padding: 4px 0;
+    }
+
+    .prompt-code {
+        font-size: 13px;
+    }
+
+    .printnote {
+        display: none;
+    }
+}
+
+/* =========================================================
+     10. Print
+     ========================================================= */
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    .top,
+    .printnote {
+        display: none;
+    }
+
+    .slide,
+    .slide.paper {
+        min-height: auto;
+        page-break-after: always;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: #fff;
+        color: #000;
+        padding: 30mm 18mm;
+    }
+
+    .card,
+    .paper .card,
+    .diagram,
+    .imgbox,
+    .mono,
+    .arch-group,
+    .prompt-codebox {
+        break-inside: avoid;
+    }
+
+    .lead,
+    .bullets li,
+    .card p,
+    .muted,
+    .reference {
+        color: #222 !important;
+    }
+
+    .tbl th {
+        background: #111 !important;
+        color: #fff !important;
+    }
+
+    .hero h1,
+    .big-title,
+    .section-title {
+        color: #000;
+    }
+
+    .quote {
+        color: #000;
+        border-left-color: #000;
+    }
+
+    .no,
+    .kicker {
+        color: #555;
+    }
+
+    .flow span {
+        background: #fff;
+        color: #000;
+        border-color: #aaa;
+    }
+
+    .footer {
+        display: none;
+    }
+}
+
+/* =========================================================
+     11. Road map
+     ========================================================= */
+.roadmap-chart {
+    margin-top: 34px;
+    border: 1px solid var(--line);
+    background: #0d0d0d;
+    padding: 26px;
+}
+
+.roadmap-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.roadmap-axis {
+    stroke: #777;
+    stroke-width: 1.5;
+}
+
+.roadmap-grid {
+    stroke: #2a2a2a;
+    stroke-width: 1;
+}
+
+.roadmap-line {
+    fill: none;
+    stroke: #777;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.roadmap-dot {
+    fill: #fff;
+    stroke: #070707;
+    stroke-width: 4;
+}
+
+.roadmap-label {
+    fill: #fff;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 800;
+    paint-order: stroke;
+    stroke: #0d0d0d;
+    stroke-width: 6px;
+    stroke-linejoin: round;
+}
+
+.roadmap-sub {
+    fill: #bdbdbd;
+    font-family: var(--sans);
+    font-size: 13px;
+    paint-order: stroke;
+    stroke: #0d0d0d;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+
+.roadmap-time {
+    fill: #aaa;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    paint-order: stroke;
+    stroke: #0d0d0d;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+
+.roadmap-caption-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.roadmap-caption {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+}
+
+.roadmap-caption b {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.roadmap-caption p {
+    margin: 0;
+    color: #c5c5c5;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+@media(max-width:820px) {
+    .roadmap-caption-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+     12. swot
+     ========================================================= */
+
+.biz-strip {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.biz-mini {
+    border-top: 2px solid #111;
+    padding: 16px 4px 8px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 18px;
+}
+
+.biz-mini span {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.06em;
+}
+
+.biz-mini p {
+    margin: 0;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.biz-mini b {
+    color: #111;
+}
+
+.swot-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 42px 1fr 1fr;
+    grid-template-rows: 34px 1fr 1fr;
+    gap: 10px;
+}
+
+.swot-head {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #bbb;
+}
+
+.swot-head.positive {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.swot-head.negative {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.swot-side {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #777;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #bbb;
+}
+
+.swot-side.internal {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.swot-side.external {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.swot-quad {
+    position: relative;
+    min-height: 230px;
+    padding: 26px 28px 24px;
+    background: #fff;
+    border: 1px solid #d6d6d0;
+    overflow: hidden;
+}
+
+.swot-quad.strength {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.swot-quad.weakness {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.swot-quad.opportunity {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.swot-quad.threat {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.swot-letter {
+    position: absolute;
+    right: 18px;
+    bottom: -22px;
+    font-size: 140px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.08em;
+    color: rgba(0, 0, 0, 0.055);
+    pointer-events: none;
+}
+
+.swot-content {
+    position: relative;
+    z-index: 1;
+}
+
+.swot-content h3 {
+    margin: 0 0 16px;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.swot-content ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.swot-content li {
+    margin: 7px 0;
+    color: #333;
+    font-size: 14.5px;
+    line-height: 1.55;
+}
+
+.swot-quad.strength {
+    border-top: 4px solid #111;
+}
+
+.swot-quad.weakness {
+    border-top: 4px solid #777;
+}
+
+.swot-quad.opportunity {
+    border-top: 4px solid #444;
+}
+
+.swot-quad.threat {
+    border-top: 4px solid #aaa;
+}
+
+@media(max-width:820px) {
+    .biz-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .biz-mini {
+        grid-template-columns: 1fr;
+    }
+
+    .swot-board {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .swot-head,
+    .swot-side {
+        display: none;
+    }
+
+    .swot-quad,
+    .swot-quad.strength,
+    .swot-quad.weakness,
+    .swot-quad.opportunity,
+    .swot-quad.threat {
+        grid-column: auto;
+        grid-row: auto;
+    }
+}
+
+/* 체크 가위표 */
+
+.mark {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.mark.yes {
+    color: #16a34a;
+}
+
+.mark.no {
+    color: #dc2626;
+}
+
+/* =========================================================
+   12. Session Flow Diagram
+   ========================================================= */
+.session-flow-diagram {
+    margin-top: 34px;
+    display: grid;
+    gap: 22px;
+}
+
+.session-flow-group {
+    border: 1px solid var(--line);
+    background: #0d0d0d;
+    padding: 22px;
+}
+
+.paper .session-flow-group {
+    background: #fff;
+    border-color: #d6d6d0;
+}
+
+.session-flow-group-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    margin-bottom: 14px;
+}
+
+.paper .session-flow-group-title {
+    color: #666;
+}
+
+.session-flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.session-flow-box {
+    flex: 1 1 150px;
+    min-width: 140px;
+    border: 1px solid var(--line);
+    background: #151515;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.paper .session-flow-box {
+    background: #fafafa;
+    border-color: #ddd;
+}
+
+.session-flow-box b {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.session-flow-box p {
+    margin: 0;
+    font-size: 13px;
+    color: #c5c5c5;
+    line-height: 1.5;
+}
+
+.paper .session-flow-box p {
+    color: #555;
+}
+
+.session-flow-arrow {
+    flex: 0 0 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 900;
+    color: #777;
+}
+
+.session-flow-loop {
+    margin-top: 12px;
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+.paper .session-flow-loop {
+    border-top-color: #bbb;
+    color: #444;
+}
+
+.session-flow-highlight {
+    border: 2px solid #fff;
+    background: #111;
+}
+
+.paper .session-flow-highlight {
+    border-color: #111;
+    background: #fff;
+}
+
+.session-flow-highlight b {
+    color: #fff;
+}
+
+.paper .session-flow-highlight b {
+    color: #111;
+}
+
+@media (max-width: 820px) {
+    .session-flow-row {
+        flex-direction: column;
+    }
+
+    .session-flow-arrow {
+        flex: 0 0 auto;
+        transform: rotate(90deg);
+        padding: 2px 0;
+    }
+}
+
+/* =========================================================
+   12. Session Flow Diagram
+   ========================================================= */
+.session-flow-diagram {
+    margin-top: 34px;
+    display: grid;
+    gap: 22px;
+}
+
+.session-flow-group {
+    border: 1px solid var(--line);
+    background: #0d0d0d;
+    padding: 22px;
+}
+
+.paper .session-flow-group {
+    background: #fff;
+    border-color: #d6d6d0;
+}
+
+.session-flow-group-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    margin-bottom: 14px;
+}
+
+.paper .session-flow-group-title {
+    color: #666;
+}
+
+.session-flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.session-flow-box {
+    flex: 1 1 150px;
+    min-width: 140px;
+    border: 1px solid var(--line);
+    background: #151515;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.paper .session-flow-box {
+    background: #fafafa;
+    border-color: #ddd;
+}
+
+.session-flow-box b {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.session-flow-box p {
+    margin: 0;
+    font-size: 13px;
+    color: #c5c5c5;
+    line-height: 1.5;
+}
+
+.paper .session-flow-box p {
+    color: #555;
+}
+
+.session-flow-arrow {
+    flex: 0 0 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 900;
+    color: #777;
+}
+
+.session-flow-loop {
+    margin-top: 12px;
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+.paper .session-flow-loop {
+    border-top-color: #bbb;
+    color: #444;
+}
+
+.session-flow-highlight {
+    border: 2px solid #fff;
+    background: #111;
+}
+
+.paper .session-flow-highlight {
+    border-color: #111;
+    background: #fff;
+}
+
+.session-flow-highlight b {
+    color: #fff;
+}
+
+.paper .session-flow-highlight b {
+    color: #111;
+}
+
+@media (max-width: 820px) {
+    .session-flow-row {
+        flex-direction: column;
+    }
+
+    .session-flow-arrow {
+        flex: 0 0 auto;
+        transform: rotate(90deg);
+        padding: 2px 0;
+    }
+}
+
+.flow-uml {
+    max-width: 420px;
+    margin: 34px auto 0;
+}
+
+.flow-uml img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.flow-uml-wide {
+    max-width: 900px;
+    margin: 34px auto 0;
+}
+
+/* =========================================================
+     13. PDF-safe Print Override
+     - 인쇄/PDF 저장 시 브라우저가 배경색을 생략해도 흰 글씨가 사라지지 않도록
+       모든 텍스트와 SVG 텍스트를 밝은 배경용 색상으로 보정한다.
+     ========================================================= */
+@media print {
+    :root {
+        --bg: #ffffff;
+        --ink: #000000;
+        --muted: #444444;
+        --line: #9a9a9a;
+        --line2: #cfcfcf;
+        --paper: #ffffff;
+        --paper-ink: #000000;
+        --paper-muted: #444444;
+    }
+
+    html,
+    body,
+    main,
+    .slide,
+    .slide.paper {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    * {
+        text-shadow: none !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: economy;
+        print-color-adjust: economy;
+    }
+
+    body *:not(svg):not(svg *) {
+        color: #000000 !important;
+    }
+
+    .top,
+    .nav,
+    .printnote,
+    .footer {
+        display: none !important;
+    }
+
+    .slide,
+    .slide.paper {
+        min-height: auto !important;
+        margin: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 30mm 18mm !important;
+        page-break-after: always;
+        break-after: page;
+    }
+
+    main .slide:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    .card,
+    .paper .card,
+    .numcard,
+    .diagram,
+    .imgbox,
+    .mono,
+    .src,
+    .flow span,
+    .arch-group,
+    .paper .arch-group,
+    .arch-core,
+    .paper .arch-core,
+    .arch-item,
+    .arch-core .arch-item,
+    .arch-note,
+    .prompt-codebox,
+    .prompt-code .slot,
+    .prompt-explain-num,
+    .roadmap-chart,
+    .roadmap-caption,
+    .session-flow-group,
+    .paper .session-flow-group,
+    .session-flow-box,
+    .paper .session-flow-box,
+    .session-flow-highlight,
+    .paper .session-flow-highlight,
+    .swot-quad,
+    code,
+    pre {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #9a9a9a !important;
+    }
+
+    .quote {
+        color: #000000 !important;
+        border-left-color: #000000 !important;
+    }
+
+    .badge,
+    .paper .badge {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #9a9a9a !important;
+    }
+
+    .tbl th,
+    .paper .tbl th,
+    .tbl td,
+    .paper .tbl td {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #9a9a9a !important;
+    }
+
+    .prompt-code,
+    .prompt-code code,
+    .prompt-code span,
+    .prompt-code .kw,
+    .prompt-code .fn,
+    .prompt-code .var,
+    .prompt-code .str,
+    .prompt-code .slot,
+    .prompt-code .comment,
+    .paper .prompt-code,
+    .paper .prompt-code span {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #9a9a9a !important;
+    }
+
+    svg,
+    .diagram svg,
+    .roadmap-svg {
+        background: #ffffff !important;
+    }
+
+    svg text,
+    svg tspan,
+    .diagram svg text,
+    .roadmap-svg text {
+        fill: #000000 !important;
+        stroke: none !important;
+    }
+
+    svg rect,
+    svg circle,
+    svg ellipse,
+    svg polygon,
+    svg line,
+    svg polyline,
+    svg path {
+        stroke: #000000 !important;
+    }
+
+    svg path[fill="none"],
+    svg rect[fill="none"],
+    svg circle[fill="none"],
+    svg line[fill="none"],
+    svg polyline[fill="none"] {
+        fill: none !important;
+    }
+
+    svg marker path {
+        fill: #000000 !important;
+        stroke: none !important;
+    }
+
+    .roadmap-dot,
+    svg circle[fill="#fff"],
+    svg rect[fill="#fff"] {
+        fill: #ffffff !important;
+        stroke: #000000 !important;
+    }
+
+    .roadmap-grid {
+        stroke: #d0d0d0 !important;
+    }
+
+    .roadmap-line,
+    .roadmap-axis {
+        stroke: #000000 !important;
+    }
+
+    .swot-letter {
+        color: rgba(0, 0, 0, 0.06) !important;
+    }
+}
+
+/* style.css에 추가 */
+code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: #1e1e1e;
+    color: #e8e8e8;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.paper code {
+    background: #efefef;
+    color: #1a1a1a;
+    border: 1px solid #d0d0d0;
+}
+
+/* =========================================================
+   19. Background Tag & Serving
+   ========================================================= */
+.bgserve-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.bgserve-panel {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 28px;
+    min-height: 100%;
+}
+
+.bgserve-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.bgserve-panel h3 {
+    margin: 0 0 14px;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+}
+
+.bgserve-panel p {
+    margin: 0;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.tag-example {
+    margin: 26px 0;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    padding: 24px;
+}
+
+.tag-example span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tag-example b {
+    display: block;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.rule-strip {
+    display: grid;
+    gap: 10px;
+}
+
+.rule-strip div,
+.route-row {
+    border-top: 1px solid #d6d6d0;
+    padding-top: 13px;
+}
+
+.rule-strip strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #111;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.rule-strip span {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.route-map {
+    margin-top: 26px;
+    display: grid;
+    gap: 14px;
+}
+
+.route-row {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.route-row code,
+.bgserve-panel code {
+    font-family: var(--mono);
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.route-row span {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.bgserve-flow {
+    margin-top: 24px;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bgserve-flow span {
+    border: 1px solid #ccc;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    background: #fafafa;
+}
+
+.bgserve-flow b {
+    color: #777;
+    font-size: 18px;
+}
+
+@media (max-width: 820px) {
+    .bgserve-board {
+        grid-template-columns: 1fr;
+    }
+
+    .route-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}
+
+/* =========================================================
+   31. Report Redesign Components
+   - 표/불릿 반복 줄이기용 추가 컴포넌트
+   ========================================================= */
+
+.printnote {
+    border: 0;
+    font-family: var(--sans);
+    cursor: pointer;
+}
+
+.printnote:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.takeaway {
+    margin-top: 28px;
+    border-top: 2px solid currentColor;
+    padding-top: 16px;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.paper .takeaway {
+    color: #111;
+}
+
+.pain-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.4fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+.pain-main {
+    background: #111;
+    color: #fff;
+    padding: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 360px;
+}
+
+.pain-main .eyebrow,
+.service-kicker,
+.engine-kicker,
+.rag-kicker,
+.fix-kicker,
+.demo-kicker,
+.mentor-kicker,
+.future-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8f8f8f;
+    margin-bottom: 14px;
+}
+
+.pain-main h3 {
+    margin: 0;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+}
+
+.pain-main p {
+    margin: 24px 0 0;
+    color: #d8d8d8;
+    font-size: 16px;
+    line-height: 1.72;
+}
+
+.pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.pain-card {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 24px;
+}
+
+.pain-card .num {
+    display: block;
+    font-family: var(--mono);
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.pain-card h4 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+.pain-card p {
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.service-compare {
+    margin-top: 34px;
+    display: grid;
+    gap: 10px;
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: 190px 1fr 260px;
+    gap: 18px;
+    align-items: center;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 18px 20px;
+}
+
+.service-row.winner {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.service-name {
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.service-tags span {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: 800;
+    background: #fafafa;
+}
+
+.service-row.winner .service-tags span {
+    border-color: #666;
+    background: #fff;
+    color: #111;
+}
+
+.service-note {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.service-row.winner .service-note {
+    color: #d8d8d8;
+}
+
+.engine-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.2fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+.engine-core {
+    border: 1px solid var(--line);
+    background: #111;
+    color: #fff;
+    padding: 34px;
+}
+
+.paper .engine-core {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.engine-core h3 {
+    margin: 0;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+}
+
+.engine-core p {
+    margin: 22px 0 0;
+    color: #d8d8d8;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.engine-loop {
+    display: grid;
+    gap: 12px;
+}
+
+.engine-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 18px;
+    align-items: start;
+}
+
+.engine-step b {
+    font-family: var(--mono);
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.06em;
+}
+
+.engine-step h4 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    letter-spacing: -0.035em;
+}
+
+.engine-step p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.rag-redesign {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.rag-card {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 30px;
+}
+
+.rag-card.custom {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.rag-card h3 {
+    margin: 0 0 18px;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.rag-card dl {
+    margin: 0;
+    display: grid;
+    gap: 14px;
+}
+
+.rag-card dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+
+.rag-card.custom dt {
+    color: #aaa;
+}
+
+.rag-card dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #444;
+}
+
+.rag-card.custom dd {
+    color: #e2e2e2;
+}
+
+.rag-flowline {
+    margin-top: 18px;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.rag-flowline span {
+    border: 1px solid #ccc;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 900;
+    background: #fafafa;
+}
+
+.rag-flowline b {
+    color: #777;
+}
+
+.fix-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.fix-card {
+    border: 1px solid var(--line);
+    background: #0e0e0e;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    min-height: 310px;
+}
+
+.fix-card .fix-no {
+    font-family: var(--mono);
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.fix-card h3 {
+    margin: 0 0 18px;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.fix-card .before,
+.fix-card .after {
+    border-top: 1px solid var(--line);
+    padding-top: 13px;
+    margin-top: 12px;
+}
+
+.fix-card strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+}
+
+.fix-card p {
+    margin: 0;
+    color: #c8c8c8;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.demo-showcase {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1.45fr 0.75fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.demo-main,
+.demo-side {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 12px;
+}
+
+.demo-main img,
+.demo-side img {
+    width: 100%;
+    display: block;
+}
+
+.demo-main .caption,
+.demo-side .caption {
+    margin-top: 10px;
+}
+
+.demo-points {
+    margin-top: 16px;
+    display: grid;
+    gap: 10px;
+}
+
+.demo-point {
+    border-top: 1px solid #d6d6d0;
+    padding-top: 12px;
+}
+
+.demo-point b {
+    display: block;
+    font-size: 17px;
+    letter-spacing: -0.035em;
+    margin-bottom: 4px;
+}
+
+.demo-point span {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.mentor-board {
+    margin-top: 34px;
+    display: grid;
+    gap: 14px;
+}
+
+.mentor-item {
+    display: grid;
+    grid-template-columns: 210px 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 20px;
+}
+
+.mentor-item b {
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+.mentor-item p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.mentor-item .plan {
+    border-left: 2px solid #111;
+    padding-left: 16px;
+    color: #222;
+}
+
+.future-board {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.future-lane {
+    border: 1px solid var(--line);
+    background: #0e0e0e;
+    padding: 28px;
+}
+
+.future-lane h3 {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: 32px;
+    letter-spacing: -0.05em;
+}
+
+.future-pair {
+    display: grid;
+    gap: 12px;
+}
+
+.future-pair div {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+}
+
+.future-pair b {
+    display: block;
+    color: #fff;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.future-pair span {
+    display: block;
+    color: #c5c5c5;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+#artifact .diagram,
+#artifact .imgbox {
+    background: #fff;
+    border-color: #777;
+}
+
+#artifact .caption {
+    color: #777;
+}
+
+@media (max-width: 820px) {
+
+    .pain-board,
+    .engine-board,
+    .rag-redesign,
+    .demo-showcase,
+    .future-board {
+        grid-template-columns: 1fr;
+    }
+
+    .pain-grid,
+    .fix-board {
+        grid-template-columns: 1fr;
+    }
+
+    .service-row,
+    .mentor-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+
+    .takeaway,
+    .pain-main,
+    .pain-card,
+    .service-row,
+    .service-tags span,
+    .engine-core,
+    .engine-step,
+    .rag-card,
+    .rag-flowline,
+    .rag-flowline span,
+    .fix-card,
+    .demo-main,
+    .demo-side,
+    .demo-point,
+    .mentor-item,
+    .future-lane,
+    .future-pair div {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #9a9a9a !important;
+    }
+
+    .pain-main *,
+    .pain-card *,
+    .service-row *,
+    .engine-core *,
+    .engine-step *,
+    .rag-card *,
+    .fix-card *,
+    .demo-main *,
+    .demo-side *,
+    .mentor-item *,
+    .future-lane * {
+        color: #000000 !important;
+    }
+}
+
+/* =========================================================
+   PATCH 01. 13-1 시스템 프롬프트 페이지 톤 다운
+   ========================================================= */
+
+.prompt-codebox {
+    border: 1px solid var(--line);
+    background: #0f0f10;
+    padding: 24px;
+    overflow: auto;
+}
+
+.prompt-code {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.85;
+    color: #d6d6d6;
+    white-space: pre;
+}
+
+.prompt-code .kw,
+.prompt-code .fn,
+.prompt-code .var,
+.prompt-code .str,
+.prompt-code .comment,
+.prompt-code .slot {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.prompt-code .kw {
+    color: #77b3ff;
+    font-weight: 800;
+}
+
+.prompt-code .fn {
+    color: #f3f3f3;
+    font-weight: 800;
+}
+
+.prompt-code .var {
+    color: #d0d7e6;
+    font-weight: 700;
+}
+
+.prompt-code .str {
+    color: #a6e35f;
+    font-weight: 700;
+}
+
+.prompt-code .slot {
+    color: #9fc6ff;
+    font-weight: 800;
+}
+
+.prompt-code .comment {
+    color: #8ee6ae;
+    font-weight: 800;
+}
+
+.paper .prompt-codebox {
+    border-color: #d6d6d0;
+    background: #111;
+}
+
+.paper .prompt-code {
+    color: #e7e7e7;
+}
+
+.paper .prompt-code .kw {
+    color: #7db1ff;
+}
+
+.paper .prompt-code .fn {
+    color: #ffffff;
+}
+
+.paper .prompt-code .var {
+    color: #d6deea;
+}
+
+.paper .prompt-code .str {
+    color: #a7ea66;
+}
+
+.paper .prompt-code .slot {
+    color: #aad0ff;
+}
+
+.paper .prompt-code .comment {
+    color: #93f0b4;
+}
+
+/* =========================================================
+   PATCH 02. 19페이지 bgserve 가독성 수정
+   ========================================================= */
+
+.bgserve-panel {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 28px;
+    min-height: 100%;
+    color: #111;
+}
+
+.bgserve-panel h3 {
+    margin: 0 0 14px;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    color: #111;
+}
+
+.bgserve-panel p {
+    margin: 0;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.bgserve-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.bgserve-panel code,
+.route-row code {
+    color: #fff;
+    background: #1b1b1d;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+.route-row {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 16px;
+    align-items: start;
+    border-top: 1px solid #d6d6d0;
+    padding-top: 13px;
+}
+
+.route-row span {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.rule-strip strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #111;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.rule-strip span {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.bgserve-flow {
+    margin-top: 24px;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bgserve-flow span {
+    border: 1px solid #ccc;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    background: #fafafa;
+    color: #111;
+}
+
+.bgserve-flow b {
+    color: #777;
+    font-size: 18px;
+}
+
+/* =========================================================
+   PATCH 03. 22페이지 데모 섹션 레이아웃 재구성
+   ========================================================= */
+
+.demo-gallery {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.demo-shot {
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 12px;
+}
+
+.demo-shot img {
+    width: 100%;
+    display: block;
+}
+
+.demo-shot .caption {
+    margin-top: 10px;
+}
+
+.demo-feature-box {
+    margin-top: 22px;
+    border: 1px solid #d6d6d0;
+    background: #fff;
+    padding: 26px;
+}
+
+.demo-feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+    margin-top: 18px;
+}
+
+.demo-feature {
+    border-top: 1px solid #d6d6d0;
+    padding-top: 14px;
+}
+
+.demo-feature b {
+    display: block;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+    color: #111;
+}
+
+.demo-feature p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (max-width: 820px) {
+
+    .demo-gallery,
+    .demo-feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   PDF Export Mode: 섹션별 페이지 분리
+   - dark / paper 배경 유지
+   ========================================================= */
+
+body.pdf-section-pages {
+    background: var(--bg);
+    color: var(--ink);
+}
+
+body.pdf-section-pages .top,
+body.pdf-section-pages .printnote {
+    display: none !important;
+}
+
+body.pdf-section-pages main {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+}
+
+/* 기본 slide는 원래처럼 dark */
+body.pdf-section-pages .slide {
+    min-height: auto;
+    margin: 0 !important;
+    border: 0;
+    border-radius: 0;
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    break-after: page;
+    page-break-after: always;
+}
+
+/* paper slide만 밝은 배경 */
+body.pdf-section-pages .slide.paper {
+    background: var(--paper) !important;
+    color: var(--paper-ink) !important;
+}
+
+/* 마지막 섹션 뒤에는 빈 페이지 만들지 않기 */
+body.pdf-section-pages .slide:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+}
+
+/* dark 섹션 글씨색 복구 */
+body.pdf-section-pages .slide:not(.paper) .lead,
+body.pdf-section-pages .slide:not(.paper) .bullets li,
+body.pdf-section-pages .slide:not(.paper) .card p,
+body.pdf-section-pages .slide:not(.paper) .muted,
+body.pdf-section-pages .slide:not(.paper) .reference {
+    color: #d5d5d5 !important;
+}
+
+body.pdf-section-pages .slide:not(.paper) .section-title,
+body.pdf-section-pages .slide:not(.paper) .big-title,
+body.pdf-section-pages .slide:not(.paper) .mini-title,
+body.pdf-section-pages .slide:not(.paper) h1,
+body.pdf-section-pages .slide:not(.paper) h2,
+body.pdf-section-pages .slide:not(.paper) h3,
+body.pdf-section-pages .slide:not(.paper) h4 {
+    color: #fff !important;
+}
+
+body.pdf-section-pages .slide:not(.paper) .no,
+body.pdf-section-pages .slide:not(.paper) .kicker {
+    color: var(--muted) !important;
+}
+
+/* paper 섹션 글씨색 유지 */
+body.pdf-section-pages .slide.paper .lead,
+body.pdf-section-pages .slide.paper .bullets li,
+body.pdf-section-pages .slide.paper .card p,
+body.pdf-section-pages .slide.paper .muted,
+body.pdf-section-pages .slide.paper .reference {
+    color: #333 !important;
+}
+
+body.pdf-section-pages .slide.paper .section-title,
+body.pdf-section-pages .slide.paper .big-title,
+body.pdf-section-pages .slide.paper .mini-title,
+body.pdf-section-pages .slide.paper h1,
+body.pdf-section-pages .slide.paper h2,
+body.pdf-section-pages .slide.paper h3,
+body.pdf-section-pages .slide.paper h4 {
+    color: #111 !important;
+}
+
+body.pdf-section-pages .slide.paper .no,
+body.pdf-section-pages .slide.paper .kicker {
+    color: #707070 !important;
+}
+
+/* 섹션 내부에서 카드/이미지/표가 중간에 잘리는 것 완화 */
+body.pdf-section-pages .card,
+body.pdf-section-pages .imgbox,
+body.pdf-section-pages .diagram,
+body.pdf-section-pages .table-wrap,
+body.pdf-section-pages .pain-board,
+body.pdf-section-pages .service-row,
+body.pdf-section-pages .engine-board,
+body.pdf-section-pages .rag-redesign,
+body.pdf-section-pages .fix-board,
+body.pdf-section-pages .demo-gallery,
+body.pdf-section-pages .demo-feature-box,
+body.pdf-section-pages .mentor-item,
+body.pdf-section-pages .future-lane {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}

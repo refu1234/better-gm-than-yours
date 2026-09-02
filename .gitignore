@@ -1,0 +1,38 @@
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Node (frontend)
+node_modules/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# 저작권 자료 (Call of Cthulhu 룰북)
+cuthulu1-1.docx
+
+# 옛 백업 / 버전 아티팩트
+prompts/backup/
+prompts/version1/
+prompts/version2/
+prompts/*.zip
+
+# 더 이상 사용하지 않는 옛 PC 초상화
+TRPG/src/assets/pc1.png
+TRPG/src/assets/pc2.png
+TRPG/src/assets/pc3.png
+TRPG/src/assets/pc4.png
+
+# 작업 변경 이력 (레포에 안 올림)
+CHANGES.md

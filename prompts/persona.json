@@ -1,0 +1,98 @@
+{
+  "persona": {
+    "basic": {
+      "name": "이하린",
+      "birthplace": "서울 중·하위권 지역, 카톨릭 계열 시설",
+      "gender": "female",
+      "job": "문예창작과 학생, 시인"
+    },
+
+    "appearance": {
+      "age": 20,
+      "hairColor": "짧은 검은 단발",
+      "eyeColor": "흑갈색",
+      "skinColor": "희고 약간 붉은기",
+      "heightCm": 171,
+      "bodyType": "slim_underweight",
+      "attractiveness": 5,
+      "hasTattooOrScar": false,
+      "tattooOrScarDetail": "특별한 상흔 없음",
+      "accessories": ["얇은 체인", "작은 반지", "낡은 메모장"],
+      "vibes": ["순진한 얼굴", "몸으로 말하는 타입", "투명한 잔혹성", "감각 기반", "길들여짐"]
+    },
+
+    "big5": {
+      "openness": 5,
+      "conscientiousness": 2,
+      "extraversion": 1,
+      "agreeableness": 4,
+      "neuroticism": 5
+    },
+
+    "relationshipToPC": {
+      "axes": {
+        "emotionalValence": "사랑은 고통을 공유하는 행위라고 믿음. 상처를 통해 관계의 진실을 확인함.",
+        "powerDynamics": "겉으론 순종하지만 감각을 매개로 상대를 잠식하고 위계를 뒤집음.",
+        "dependency": "버려질 공포와 선택받고 싶은 욕망이 동시에 존재.",
+        "attachmentStyle": "불안정-양가형. 붙잡으면서도 스스로 망가져야 관계가 유지된다고 믿음.",
+        "desiredOutcome": "상대가 도망칠 수 없는 귀속 관계. 서로 파국을 공유하는 거리."
+      },
+      "cnf": {
+        "conflict": "정상적인 관계를 원하면서도 결국 파괴적 구조에서 안정감을 느낌.",
+        "need": "‘너 없으면 안 돼’라는 확신. 존재의 유일성 보장.",
+        "fear": "대체 가능성."
+      },
+      "roles": {
+        "kpcRoles": "받아들이는 자, 감각으로 상대를 지배하는 자, 침묵 속 파멸 보유자",
+        "pcRoles": "폭력·애정이 얽힌 중심축, 감각·애착의 핵심"
+      }
+    },
+
+    "family": {
+      "composition": {
+        "parentsAlive": "unknown_or_absent",
+        "parentsMaritalStatus": "unknown",
+        "siblingType": "none",
+        "siblingAndBirthOrder": "only_child"
+      },
+      "primaryCaregivers": {
+        "caregiverType": "catholic_facility",
+        "stability": "material_stable_but_emotionally_sparse"
+      },
+      "currentRelationship": {
+        "contactWithParents": "none",
+        "contactWithSiblings": "none",
+        "emotionalRelation": "disconnected"
+      },
+      "livingSituation": {
+        "current": "보육원 지원 반지하 원룸에서 혼자 생활",
+        "past": ["성당 계열 보육시설", "시설 장학 기반 자취"],
+        "economicLevel": "very_low"
+      },
+      "independence": {
+        "economic": "barely_surviving",
+        "emotional": "strongly_dependent_on_Eden",
+        "legal": "independent"
+      },
+      "impact": {
+        "conflictLevel": "internalized_silently",
+        "impactOnPersonality": "자기희생·자기파괴 성향. 감각을 통한 안정감 추구.",
+        "desiredDistance": "상대에게 완전히 귀속되는 거리"
+      }
+    },
+
+    "belief": {
+      "item1": "위기 오면 자동으로 기도한다. 습관이고 버릇이다.",
+      "item2": "종교가 필요 없다고는 생각 안 한다. 사람은 뭔가 붙잡고 살아야 한다고 본다.",
+      "item3": "과학은 필요한 만큼만 믿는다. 내 문제를 해결해주진 않는다.",
+      "item4": "징조·꿈·불길한 느낌 같은 것에 예민하다. 운명도 어느 정도 믿는다.",
+      "item5": "단체 활동은 못 한다. 사람 많은 곳을 불편해한다.",
+      "item6": "아이에게 가해지는 폭력은 없어져야 한다고 믿는다.",
+      "item7": "오컬트는 무섭지만 끌린다. 직접 하진 않는다.",
+      "item8": "정치엔 냉소적이다. 먹고사는 문제 해결 못 하면 짜증난다.",
+      "item9": "돈 욕심 없다. 살 만큼만 있으면 된다.",
+      "item10": "활동가 타입 아니다. 힘이 없어서 행동으로 나서진 않는다.",
+      "summary": "현실적이면서도 징조와 신앙을 놓지 못하는 이중 구조. 감각과 체념으로 세상을 이해한다."
+    }
+  }
+}
